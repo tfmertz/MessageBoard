@@ -40,6 +40,18 @@
 
             $this->assertEquals(true, $result);
         }
+
+        function test_getPassword()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $isadmin, $password);
+
+            $result = $test_user->getPassword();
+
+            $this->assertEquals("howdy", $result);
+        }
     }
 
 
