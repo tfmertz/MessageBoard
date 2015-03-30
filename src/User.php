@@ -45,8 +45,12 @@
         }
         function setId($new_id)
         {
-            $this->id = $new_id; 
+            $this->id = $new_id;
         }
+        // function save()
+        // {
+        //     $statement = $GLOBALS['DB']->query("INSERT INTO users ")
+        // }
     }
 
 
