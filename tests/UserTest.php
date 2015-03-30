@@ -52,6 +52,19 @@
 
             $this->assertEquals("howdy", $result);
         }
+
+        function test_getId()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $id = 1;
+            $test_user = new User($name, $isadmin, $password, $id);
+
+            $result = $test_user->getId();
+
+            $this->assertEquals(1, $result);
+        }
     }
 
 
