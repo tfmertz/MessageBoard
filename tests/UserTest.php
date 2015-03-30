@@ -65,6 +65,21 @@
 
             $this->assertEquals(1, $result);
         }
+
+        function test_setName()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $isadmin, $password);
+            $new_name = "Taylor";
+
+            $test_user->setName($new_name);
+            $result = $test_user->getName();
+
+            $this->assertEquals("Taylor", $result);
+
+        }
     }
 
 
