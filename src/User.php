@@ -43,6 +43,10 @@
         {
             $this->password = (string) $new_password;
         }
+        function setId($new_id)
+        {
+            $this->id = $new_id; 
+        }
     }
 
 

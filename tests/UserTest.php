@@ -108,6 +108,20 @@
 
             $this->assertEquals("hey there", $result);
         }
+
+        function test_setId()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $isadmin, $password);
+            $new_id = 45;
+
+            $test_user->setId($new_id);
+            $result = $test_user->getId();
+
+            $this->assertEquals(45, $result);
+        }
     }
 
 
