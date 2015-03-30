@@ -80,6 +80,20 @@
             $this->assertEquals("Taylor", $result);
 
         }
+
+        function test_setIsAdmin()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $isadmin, $password);
+            $new_isadmin = false;
+
+            $test_user->setIsAdmin($new_isadmin);
+            $result = $test_user->getIsAdmin();
+
+            $this->assertEquals(false, $result);
+        }
     }
 
 
