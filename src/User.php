@@ -3,11 +3,11 @@
     class User
     {
         private $name;
-        private $id;
         private $isAdmin;
         private $password;
+        private $id;
 
-        function __constuct($name, $isAdmin, $password, $id = null)
+        function __construct($name, $isAdmin, $password, $id = null)
         {
             $this->name = $name;
             $this->isAdmin = $isAdmin;
@@ -39,6 +39,18 @@
         {
             $this->isAdmin = (boolean) $new_admin;
         }
+        function setPassword($new_password)
+        {
+            $this->password = (string) $new_password;
+        }
+        function setId($new_id)
+        {
+            $this->id = $new_id;
+        }
+        // function save()
+        // {
+        //     $statement = $GLOBALS['DB']->query("INSERT INTO users ")
+        // }
     }
 
 
