@@ -94,6 +94,20 @@
 
             $this->assertEquals(false, $result);
         }
+
+        function test_setPassword()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $isadmin, $password);
+            $new_password = "hey there";
+
+            $test_user->setPassword($new_password);
+            $result = $test_user->getPassword();
+
+            $this->assertEquals("hey there", $result);
+        }
     }
 
 

@@ -39,6 +39,10 @@
         {
             $this->isAdmin = (boolean) $new_admin;
         }
+        function setPassword($new_password)
+        {
+            $this->password = (string) $new_password;
+        }
     }
 
 
