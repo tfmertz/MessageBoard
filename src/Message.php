@@ -13,8 +13,8 @@
             $this->id = $id;
         }
 
-        function getId(){
-            
+        function getId() {
+            return $this->id;
         }
 
 
