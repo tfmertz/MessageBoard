@@ -1,12 +1,11 @@
 <?php
 
-
- class Tag
+class Tag
  {
    private $name;
    private $id;
 
-       function __construct($name,$id=null)
+       function __construct($name, $id=null)
        {
          $this->name = $name;
          $this->id = $id;
@@ -35,7 +34,29 @@
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
-      
+       static function deleteAll()
+        {
+          $GLOBALS['DB']->exec("DELETE FROM tags*;");
+
+        }
+
+      static function getAll()
+       {
+         $return_tags =  $GLOBALS['DB']->query("SELECT * FROM tags");
+         $tag_array = array();
+         foreach($return_tags as $tag)
+         {
+             $name = $tag['name'];
+             $id = $tag['id'];
+             $new_tag = new Tag($name,$id);
+             array_push($tag_array, $new_tag);
+         }
+         return $tag_array;
+       }
+
+
+
+
  }
 
 

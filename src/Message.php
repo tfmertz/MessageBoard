@@ -1,7 +1,5 @@
 <?php
 
-
-
     class Message
     {
         private $message_id;
@@ -137,6 +135,7 @@
 
 
     }
+
 
 
 

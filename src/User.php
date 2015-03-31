@@ -7,7 +7,7 @@
         private $password;
         private $id;
 
-        function __construct($name, $isAdmin, $password, $id = null)
+        function __construct($name, $password, $isAdmin = false, $id = null)
         {
             $this->name = $name;
             $this->isAdmin = $isAdmin;
@@ -49,20 +49,21 @@
         }
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO users (name, isAdmin, password) VALUES ('{$this->getName()}', '{$this->getIsAdmin()}', '{$thiq->getPassword()}') RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO users (name, admin, password) VALUES ('{$this->getName()}', '{$this->getIsAdmin()}', '{$this->getPassword()}') RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
 
-        // function updatePassword($new_password)
-        // {
-        //     //$GLOBALS['DB']->exec("UPDATE users SET password = '$new_password' WHERE id = {$this->getId()}");
-        // }
+        function updatePassword($new_password)
+        {
+            $GLOBALS['DB']->exec("UPDATE users SET password = '{$new_password}' WHERE id = {$this->getId()};");
+            $this->setPassword($new_password);
+        }
 
-        //function delete()
-        //{
-        //    $GLOBALS['DB']->exec("DELETE FROM users (name, ");
-        //}
+        function delete()
+        {
+           $GLOBALS['DB']->exec("DELETE FROM users WHERE id = {$this->getId()};");
+        }
 
         static function deleteAll()
         {
@@ -75,10 +76,10 @@
             $users = [];
             foreach ($returned_users as $user) {
                $name = $user['name'];
-               $isAdmin = $user['isAdmin'];
+               $isAdmin = $user['admin'];
                $password = $user['password'];
                $id = $user['id'];
-               $new_user = new User(name, isAdmin, password, id);
+               $new_user = new User($name, $password, $isAdmin, $id);
                array_push($users, $new_user);
             }
             return $users;
