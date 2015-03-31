@@ -7,15 +7,17 @@
 */
 
     require_once 'src/User.php';
+    require_once 'src/Message.php';
 
     //add DB initialization later
 
     class UserTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //
-        // }
+        protected function tearDown()
+         {
+            User::deleteAll();
+            //Mesage::deleteAll();
+         }
 
         function test_getName()
         {
@@ -122,6 +124,69 @@
 
             $this->assertEquals(45, $result);
         }
+
+        function test_save()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $isadmin, $password);
+            $test_user->save();
+
+            $result = User::getAll();
+
+            $this->assertEquals([$test_user], $result);
+        }
+
+        function test_getAll()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $isadmin, $password);
+            $test_user->save();
+
+            $name2 = "Richard";
+            $password2 = "bouh";
+            $test_user2 = new User($name2, $isadmin, $password2);
+            $test_user2->save();
+
+
+            $result = User::getAll();
+
+            $this->assertEquals([$test_user, $test_user2], $result);
+        }
+
+        function test_updatePassword()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $isadmin, $password);
+            $new_password = 'rebouh';
+
+            $test_user->updatePassord($new_id);
+            $result = $test_user->getPassword();
+
+            $this->assertEquals($new_password, $result);
+        }
+
+        function test_getMessages()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $isadmin, $password);
+
+            $text = 'bla bla plein de chose à dire';
+            $message = new Message($text);
+            $message->save();
+
+            $result = $test_user->getMessages();
+
+            $this->assertEquals([$message], $result);
+        }
+
     }
 
 
