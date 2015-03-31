@@ -57,18 +57,18 @@
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO messages (message, created) VALUES ('{$this->getMessage()}, {$this->getDate()}') RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO messages (message, created, user_id) VALUES ('{$this->getMessage()}', '{$this->getDate()}', {$this->getUserId()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setMessageId($result['id']);
 
         }
 
-        function deleteAll()
+        static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM messages *;");
         }
 
-        function getAll()
+        static function getAll()
         {
             $returned_messages = $GLOBALS['DB']->query("SELECT * FROM messages;");
             $messages = array();
