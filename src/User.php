@@ -103,14 +103,36 @@
             return $messages;
         }
 
-        static function checkAvailable($user_name)
+        static function checkAvailable($check_user_name)
         {
-            $statement = $GLOBALS['DB']->query("SELECT * FROM users WHERE name=$user_name;");
-            if(mysql_num_rows($statement)>=1){
-                $check= fault;
-            } else $check= true;
+            $user_names=[];
+            $all_users= User::getAll();
+
+            foreach($all_users as $user){
+                $user_name= $user->getName();
+                array_push($user_names, $user_name);
+            }
+
+        if (in_array($check_user_name, $user_names, TRUE))
+        {
+            $result="fail";
+            break;
+        } else $result= "passed";
+        return $result;
         }
 
+        static function logInCheck($user_name, $password)
+        {
+            $all_users= User::getAll();
+
+            foreach($all_users as $user){
+
+                if (($user->getName() == $user_name) && ($user->getPassword() == $password)){
+                    $check = "passed"; break;
+                } else $check = "failed";
+            }
+            return $check2;
+        }
 
 
     }

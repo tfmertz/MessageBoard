@@ -47,15 +47,8 @@
 
         if (!$_POST['username'] && !$_POST['password'] ){
             $user_name = $_POST['username'];
-            if (str_word_count($user_name)>1){
-                if (User::checkAvailable($user_name))
-                    {
-                        $password= $_POST['password'];
-                        $new_user = new User($user_name, $password);
-                        $new_user->save();
-                    } else $alert= "this User name is already exit. Please choose another User name";
-                } else $alert= "cannot space two words";
-            } else $alert= "please fill in the user name";
+            $password= $_POST['password'];
+            
 
     return $app['twig']->render('??????.html.twig', array(??????????);
     });
