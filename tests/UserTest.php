@@ -9,7 +9,7 @@
     require_once 'src/User.php';
     require_once 'src/Message.php';
 
-    //add DB initialization later
+    $DB = new PDO('pgsql:host=localhost;dbname=message_test');
 
     class UserTest extends PHPUnit_Framework_TestCase
     {
