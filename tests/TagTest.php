@@ -4,9 +4,6 @@
 * @backupStaticAttributes disabled
 */
 
-
-
-
     require_once 'src/Tag.php';
 
 
@@ -18,6 +15,26 @@
         {
           Tag::deleteAll();
         }
+
+             function test_setId()
+             {
+
+             }
+            function test_getName()
+            {
+                //arrang
+                $name = "tommy";
+                $id = null;
+                $test_tags = new Tag($name,$d);
+
+                //act
+                $result = $test_tags->getName();
+
+                //assert
+                $this->assertEquals($name,$result);
+
+
+            }
 
             function test_setName()
             {
