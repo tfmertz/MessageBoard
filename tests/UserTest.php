@@ -7,9 +7,10 @@
 */
 
     require_once 'src/User.php';
-    require_once 'src/Message.php';
+    // require_once 'src/Message.php';
 
     $DB = new PDO("pgsql:host=localhost;dbname=message_test");
+
 
     class UserTest extends PHPUnit_Framework_TestCase
     {
@@ -128,9 +129,9 @@
         function test_save()
         {
             $name = "Tyler";
-            $isadmin = true;
+            $isAdmin = TRUE;
             $password = "howdy";
-            $test_user = new User($name, $isadmin, $password);
+            $test_user = new User($name, $isAdmin, $password);
             $test_user->save();
 
             $result = User::getAll();
@@ -141,14 +142,14 @@
         function test_getAll()
         {
             $name = "Tyler";
-            $isadmin = true;
+            $isAdmin = TRUE;
             $password = "howdy";
-            $test_user = new User($name, $isadmin, $password);
+            $test_user = new User($name, $isAdmin, $password);
             $test_user->save();
 
             $name2 = "Richard";
             $password2 = "bouh";
-            $test_user2 = new User($name2, $isadmin, $password2);
+            $test_user2 = new User($name2, $isAdmin, $password2);
             $test_user2->save();
 
 
@@ -157,6 +158,7 @@
             $this->assertEquals([$test_user, $test_user2], $result);
         }
 
+<<<<<<< HEAD
         // function test_updatePassword()
         // {
         //     $name = "Tyler";
@@ -171,6 +173,22 @@
         //
         //     $this->assertEquals($new_password, $result);
         // }
+=======
+        function test_updatePassword()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $isadmin, $password);
+            $test_user->save();
+            $new_password = 'rebouh';
+
+            $test_user->updatePassword($new_password);
+            $result = $test_user->getPassword();
+
+            $this->assertEquals($new_password, $result);
+        }
+>>>>>>> 23ac9f90ea6a7200897bc8a92ccdb12f8f1baed0
 
         // function test_getMessages()
         // {
@@ -188,6 +206,42 @@
         //     $this->assertEquals([$message], $result);
         // }
 
+        function test_delete()
+        {
+            $name = "Tyler";
+            $isAdmin = TRUE;
+            $password = "howdy";
+            $test_user = new User($name, $isAdmin, $password);
+            $test_user->save();
+
+            $name2 = "Richard";
+            $password2 = "bouh";
+            $test_user2 = new User($name2, $isAdmin, $password2);
+            $test_user2->save();
+
+            $test_user2->delete();
+            $result = User::getAll();
+            $this->assertEquals([$test_user], $result);
+        }
+
+        function test_deleteAll()
+        {
+            $name = "Conor";
+            $password = "big butts";
+            $isAdmin = True;
+            $test_user = new User($name, $isAdmin, $password);
+            $test_user->save();
+
+            $name2 = "Connie";
+            $password2 = "Conor girl version";
+            $test_user2 = new User($name2, $isAdmin, $password2);
+            $test_user2->save();
+
+            User::deleteAll();
+            $result = User::getAll();
+
+            $this->assertEquals([], $result);
+        }
     }
 
 

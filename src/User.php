@@ -54,15 +54,16 @@
             $this->setId($result['id']);
         }
 
-        // function updatePassword($new_password)
-        // {
-        //     //$GLOBALS['DB']->exec("UPDATE users SET password = '$new_password' WHERE id = {$this->getId()}");
-        // }
+        function updatePassword($new_password)
+        {
+            $GLOBALS['DB']->exec("UPDATE users SET password = '{$new_password}' WHERE id = {$this->getId()};");
+            $this->setPassword($new_password);
+        }
 
-        //function delete()
-        //{
-        //    $GLOBALS['DB']->exec("DELETE FROM users (name, ");
-        //}
+        function delete()
+        {
+           $GLOBALS['DB']->exec("DELETE FROM users WHERE id = {$this->getId()};");
+        }
 
         static function deleteAll()
         {
