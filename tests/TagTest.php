@@ -161,15 +161,16 @@
 
              function test_getMessages()
              {
-                     $user_id = 10000;
-                     $date = " 10 23 ";
-                     $text = 'where are you coming from';
-                     $message = new Message($user_id,$text,$date);
+                     $user_id = 10;
+                     $date = "2008-11-11 13:23:44";
+                     $text = "where are you coming from";
+                     $message = new Message($text,$date,$user_id);
                      $message->save();
 
                      $name = "Bar";
                      $test_tag = new Tag($name);
                      $test_tag->save();
+                     $test_tag->addMessage($message);
 
                      $result = $test_tag->getMessages();
 
