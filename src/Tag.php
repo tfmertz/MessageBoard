@@ -54,6 +54,22 @@ class Tag
          return $tag_array;
        }
 
+        static function findById($search_id)
+       {
+           $statement = $GLOBALS['DB']->query("SELECT * FROM tags WHERE id =$search_id;");
+           $tags_id = $statement->fetchAll(PDO::FETCH_ASSOC);
+           $tags = null;
+           foreach($tags_id as $row)
+           {
+               $id = $row['id'];
+               $name = $row['name'];
+               $new_tag = new Tag($name, $id);
+               $tags = $new_tag;
+           }
+           return $tags;
+       }
+
+
 
 
 

@@ -158,22 +158,7 @@
             $this->assertEquals([$test_user, $test_user2], $result);
         }
 
-<<<<<<< HEAD
-        // function test_updatePassword()
-        // {
-        //     $name = "Tyler";
-        //     $isadmin = true;
-        //     $password = "howdy";
-        //     $test_user = new User($name, $isadmin, $password);
-        //     $new_password = 'rebouh';
-        //
 
-        //     $test_user->updatePassword($new_id);
-        //     $result = $test_user->getPassword();
-        //
-        //     $this->assertEquals($new_password, $result);
-        // }
-=======
         function test_updatePassword()
         {
             $name = "Tyler";
@@ -188,7 +173,7 @@
 
             $this->assertEquals($new_password, $result);
         }
->>>>>>> 23ac9f90ea6a7200897bc8a92ccdb12f8f1baed0
+
 
         // function test_getMessages()
         // {
