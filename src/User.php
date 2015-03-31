@@ -7,7 +7,9 @@
         private $password;
         private $id;
 
-        function __construct($name, $password, $isAdmin, $id = null)
+        new User("Tom", false);
+
+        function __construct($name, $password, $isAdmin =  false, $id = null)
         {
             $this->name = $name;
             $this->isAdmin = $isAdmin;
@@ -102,7 +104,7 @@
             return $messages;
         }
 
-        function checkAvailable($user_name)
+        static function checkAvailable($user_name)
         {
             $statement = $GLOBALS['DB']->query("SELECT * FROM users WHERE name=$user_name;");
             if(mysql_num_rows($statement)>=1){
