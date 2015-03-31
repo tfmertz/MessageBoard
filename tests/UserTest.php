@@ -209,10 +209,12 @@
             $test_user2 = new User($name2, $password2, $isadmin2);
             $test_user2->save();
 
+
             $test_user2->delete();
             $result = User::getAll();
 
-           $this->assertEquals([$test_user], $result);
+
+            $this->assertEquals([$test_user], $result);
         }
 
         function test_deleteAll()
@@ -234,15 +236,63 @@
             $this->assertEquals([], $result);
         }
 
-        // function test_checkAvailable($username)
-        // {
-        //
-        // }
-        //
-        // function test_checkLogin($username, $password)
-        // {
-        //
-        // }
+
+        function test_checkAvailable()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $password, $isadmin);
+            $test_user->save();
+
+            $name2 = "Mike";
+            $isadmin2 = true;
+            $password2 = "epicodus";
+            $test_user2 = new User($name2, $password2, $isadmin2);
+            $test_user2->save();
+
+            $result = User::checkAvailable($name);
+
+            $this->assertEquals(true, $result);
+
+        }
+
+        function test_checkAvailable2()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $password, $isadmin);
+            $test_user->save();
+
+            $name2 = "Mike";
+            $isadmin2 = true;
+            $password2 = "epicodus";
+            $test_user2 = new User($name2, $password2, $isadmin2);
+            $test_user2->save();
+
+            $result = User::checkAvailable("result must be fail");
+
+            $this->assertEquals(false, $result);
+
+        }
+
+        function test_checkLogin()
+        {
+            $name ="Nhu";
+            $password = "epicodus";
+            $isAdmin = true;
+            $test_user = new User($name, $password, $isAdmin);
+            $test_user->save();
+
+            $test_password = "big boy";
+            $test_name = "New";
+
+            $result= User::logInCheck($test_name, $test_password);
+
+            $this->assertEquals(null, $result);
+        }
+
 
         // function test_checkLogInCheckFunction()
         // {
