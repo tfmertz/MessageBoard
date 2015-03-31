@@ -7,7 +7,7 @@
         private $password;
         private $id;
 
-        function __construct($name, $isAdmin, $password, $id = null)
+        function __construct($name, $password, $isAdmin, $id = null)
         {
             $this->name = $name;
             $this->isAdmin = $isAdmin;
@@ -54,17 +54,17 @@
             $this->setId($result['id']);
         }
 
-        // function updatePassword($new_password)
-        // {
-        //     //$GLOBALS['DB']->exec("UPDATE users SET password = '$new_password' WHERE id = {$this->getId()}");
-        // }
+        function updatePassword($new_password)
+        {
+            $GLOBALS['DB']->exec("UPDATE users SET password = '$new_password' WHERE id = {$this->getId()}");
+        }
 
         //function delete()
         //{
         //    $GLOBALS['DB']->exec("DELETE FROM users (name, ");
         //}
 
-        static function deleteAll()
+        static function deleteALL()
         {
             $GLOBALS['DB']->exec("DELETE FROM users*;");
         }
@@ -78,7 +78,7 @@
                $isAdmin = $user['isAdmin'];
                $password = $user['password'];
                $id = $user['id'];
-               $new_user = new User(name, isAdmin, password, id);
+               $new_user = new User(name, password, isAdmin, id);
                array_push($users, $new_user);
             }
             return $users;
@@ -102,6 +102,13 @@
             return $messages;
         }
 
+        function checkAvailable($user_name)
+        {
+            $statement = $GLOBALS['DB']->query("SELECT * FROM users WHERE name=$user_name;");
+            if(mysql_num_rows($statement)>=1){
+                $check= fault;
+            } else $check= true;
+        }
 
 
 
