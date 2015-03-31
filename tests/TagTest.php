@@ -4,13 +4,10 @@
 * @backupStaticAttributes disabled
 */
 
-
-
-
     require_once 'src/Tag.php';
 
-
     $DB = new PDO("pgsql:host=localhost;dbname=message_test");
+
 
     class TagTest extends PHPUnit_Framework_TestCase
     {
@@ -18,6 +15,26 @@
         {
           Tag::deleteAll();
         }
+
+             function test_setId()
+             {
+
+             }
+            function test_getName()
+            {
+                //arrang
+                $name = "tommy";
+                $id = null;
+                $test_tags = new Tag($name,$d);
+
+                //act
+                $result = $test_tags->getName();
+
+                //assert
+                $this->assertEquals($name,$result);
+
+
+            }
 
             function test_setName()
             {

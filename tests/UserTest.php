@@ -20,19 +20,6 @@
             //Mesage::deleteAll();
          }
 
-<<<<<<< HEAD
-        // function test_getName()
-        // {
-        //     $name = "Tyler";
-        //     $isadmin = true;
-        //     $password = "howdy";
-        //     $test_user = new User($name, $isadmin, $password);
-        //
-        //     $result = $test_user->getName();
-        //
-        //     $this->assertEquals("Tyler", $result);
-        // }
-=======
         function test_getName()
         {
             $name = "Tyler";
@@ -167,7 +154,7 @@
 
 
             $result = User::getAll();
->>>>>>> 4f99e16f782ee195b5868f321f11a27c1ddcb6d0
+        }
 
         // function test_getIsAdmin()
         // {
@@ -295,22 +282,6 @@
         //     $this->assertEquals([$test_user, $test_user2], $result);
         // }
 
-<<<<<<< HEAD
-        // function test_updatePassword()
-        // {
-        //     $name = "Tyler";
-        //     $isadmin = true;
-        //     $password = "howdy";
-        //     $test_user = new User($name, $isadmin, $password);
-        //     $new_password = 'rebouh';
-        //
-
-        //     $test_user->updatePassword($new_id);
-        //     $result = $test_user->getPassword();
-        //
-        //     $this->assertEquals($new_password, $result);
-        // }
-=======
         function test_updatePassword()
         {
             $name = "Tyler";
@@ -325,7 +296,7 @@
 
             $this->assertEquals($new_password, $result);
         }
->>>>>>> 23ac9f90ea6a7200897bc8a92ccdb12f8f1baed0
+
 
         // function test_getMessages()
         // {
@@ -343,7 +314,6 @@
         //     $this->assertEquals([$message], $result);
         // }
 
-<<<<<<< HEAD
         function test_checkAvailable()
         {
             $name = "Tyler";
@@ -355,7 +325,8 @@
             $result= $test_user->checkAvailable($name);
 
             $this->assertEquals(true, $result);
-=======
+        }
+
         function test_delete()
         {
             $name = "Tyler";
@@ -391,7 +362,6 @@
             $result = User::getAll();
 
             $this->assertEquals([], $result);
->>>>>>> 4f99e16f782ee195b5868f321f11a27c1ddcb6d0
         }
     }
 
