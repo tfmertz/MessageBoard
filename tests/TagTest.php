@@ -25,7 +25,7 @@
                 //arrang
                 $name = "tommy";
                 $id = null;
-                $test_tags = new Tag($name,$d);
+                $test_tags = new Tag($name,$id);
 
                 //act
                 $result = $test_tags->getName();

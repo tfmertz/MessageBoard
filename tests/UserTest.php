@@ -7,7 +7,7 @@
 */
 
     require_once 'src/User.php';
-    // require_once 'src/Message.php';
+    require_once 'src/Message.php';
 
     $DB = new PDO("pgsql:host=localhost;dbname=message_test");
 
@@ -17,7 +17,7 @@
         protected function tearDown()
          {
             User::deleteAll();
-            //Mesage::deleteAll();
+            Message::deleteAll();
          }
 
         function test_getName()
@@ -158,7 +158,7 @@
             $this->assertEquals([$test_user, $test_user2], $result);
         }
 
-    
+
         function test_updatePassword()
         {
             $name = "Tyler";
@@ -174,21 +174,24 @@
             $this->assertEquals($new_password, $result);
         }
 
-        // function test_getMessages()
-        // {
-        //     $name = "Tyler";
-        //     $isadmin = true;
-        //     $password = "howdy";
-        //     $test_user = new User($name, $password, $isadmin);
-        //
-        //     $text = 'bla bla plein de chose à dire';
-        //     $message = new Message($text);
-        //     $message->save();
-        //
-        //     $result = $test_user->getMessages();
-        //
-        //     $this->assertEquals([$message], $result);
-        // }
+        function test_getMessages()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $password, $isadmin);
+            $test_user->save();
+
+            $text = 'bla bla plein de chose à dire';
+            $date = "2014-11-11 12:45:34";
+            $user_id = $test_user->getId();
+            $message = new Message($text, $date, $user_id);
+            $message->save();
+
+            $result = $test_user->getMessages();
+
+            $this->assertEquals([$message], $result);
+        }
 
         function test_delete()
         {
