@@ -171,21 +171,21 @@
         //     $this->assertEquals($new_password, $result);
         // }
 
-        function test_getMessages()
-        {
-            $name = "Tyler";
-            $isadmin = true;
-            $password = "howdy";
-            $test_user = new User($name, $isadmin, $password);
-
-            $text = 'bla bla plein de chose à dire';
-            $message = new Message($text);
-            $message->save();
-
-            $result = $test_user->getMessages();
-
-            $this->assertEquals([$message], $result);
-        }
+        // function test_getMessages()
+        // {
+        //     $name = "Tyler";
+        //     $isadmin = true;
+        //     $password = "howdy";
+        //     $test_user = new User($name, $isadmin, $password);
+        //
+        //     $text = 'bla bla plein de chose à dire';
+        //     $message = new Message($text);
+        //     $message->save();
+        //
+        //     $result = $test_user->getMessages();
+        //
+        //     $this->assertEquals([$message], $result);
+        // }
 
     }
 
