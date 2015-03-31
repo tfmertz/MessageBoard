@@ -56,7 +56,7 @@
 
         function updatePassword($new_password)
         {
-            $GLOBALS['DB']->exec("UPDATE users SET password = '$new_password' WHERE id = {$this->getId()}");
+            //$GLOBALS['DB']->exec("UPDATE users SET password = '$new_password' WHERE id = {$this->getId()}");
         }
 
         //function delete()
@@ -86,7 +86,7 @@
 
         function getMessages()
         {
-            $statement = $GLOBALS['DB']->query("SELECT messages.* FROM users 
+            $statement = $GLOBALS['DB']->query("SELECT messages.* FROM users
                                     JOIN users_messages ON (users.id = users_messages.user_id)
                                     JOIN messages ON (messages.id = users_messages.message_id)
                                     WHERE id = {$this->getId()};");
