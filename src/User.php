@@ -7,7 +7,7 @@
         private $password;
         private $id;
 
-        function __construct($name, $isAdmin, $password, $id = null)
+        function __construct($name, $password, $isAdmin = false, $id = null)
         {
             $this->name = $name;
             $this->isAdmin = $isAdmin;
@@ -79,7 +79,7 @@
                $isAdmin = $user['admin'];
                $password = $user['password'];
                $id = $user['id'];
-               $new_user = new User($name, $isAdmin, $password, $id);
+               $new_user = new User($name, $password, $isAdmin, $id);
                array_push($users, $new_user);
             }
             return $users;

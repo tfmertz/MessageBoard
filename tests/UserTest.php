@@ -25,7 +25,7 @@
             $name = "Tyler";
             $isadmin = true;
             $password = "howdy";
-            $test_user = new User($name, $isadmin, $password);
+            $test_user = new User($name, $password, $isadmin);
 
             $result = $test_user->getName();
 
@@ -37,7 +37,7 @@
             $name = "Tyler";
             $isadmin = true;
             $password = "howdy";
-            $test_user = new User($name, $isadmin, $password);
+            $test_user = new User($name, $password, $isadmin);
 
             $result = $test_user->getIsAdmin();
 
@@ -49,7 +49,7 @@
             $name = "Tyler";
             $isadmin = true;
             $password = "howdy";
-            $test_user = new User($name, $isadmin, $password);
+            $test_user = new User($name, $password, $isadmin);
 
             $result = $test_user->getPassword();
 
@@ -62,7 +62,7 @@
             $isadmin = true;
             $password = "howdy";
             $id = 1;
-            $test_user = new User($name, $isadmin, $password, $id);
+            $test_user = new User($name, $password, $isadmin, $id);
 
             $result = $test_user->getId();
 
@@ -74,7 +74,7 @@
             $name = "Tyler";
             $isadmin = true;
             $password = "howdy";
-            $test_user = new User($name, $isadmin, $password);
+            $test_user = new User($name, $password, $isadmin);
             $new_name = "Taylor";
 
             $test_user->setName($new_name);
@@ -89,7 +89,7 @@
             $name = "Tyler";
             $isadmin = true;
             $password = "howdy";
-            $test_user = new User($name, $isadmin, $password);
+            $test_user = new User($name, $password, $isadmin);
             $new_isadmin = false;
 
             $test_user->setIsAdmin($new_isadmin);
@@ -103,7 +103,7 @@
             $name = "Tyler";
             $isadmin = true;
             $password = "howdy";
-            $test_user = new User($name, $isadmin, $password);
+            $test_user = new User($name, $password, $isadmin);
             $new_password = "hey there";
 
             $test_user->setPassword($new_password);
@@ -117,7 +117,7 @@
             $name = "Tyler";
             $isadmin = true;
             $password = "howdy";
-            $test_user = new User($name, $isadmin, $password);
+            $test_user = new User($name, $password, $isadmin);
             $new_id = 45;
 
             $test_user->setId($new_id);
@@ -129,9 +129,9 @@
         function test_save()
         {
             $name = "Tyler";
-            $isAdmin = TRUE;
+            $isadmin = TRUE;
             $password = "howdy";
-            $test_user = new User($name, $isAdmin, $password);
+            $test_user = new User($name, $password, $isadmin);
             $test_user->save();
 
             $result = User::getAll();
@@ -142,14 +142,14 @@
         function test_getAll()
         {
             $name = "Tyler";
-            $isAdmin = TRUE;
+            $isadmin = TRUE;
             $password = "howdy";
-            $test_user = new User($name, $isAdmin, $password);
+            $test_user = new User($name, $password, $isadmin);
             $test_user->save();
 
             $name2 = "Richard";
             $password2 = "bouh";
-            $test_user2 = new User($name2, $isAdmin, $password2);
+            $test_user2 = new User($name2, $password, $isadmin);
             $test_user2->save();
 
 
@@ -179,7 +179,7 @@
             $name = "Tyler";
             $isadmin = true;
             $password = "howdy";
-            $test_user = new User($name, $isadmin, $password);
+            $test_user = new User($name, $password, $isadmin);
             $test_user->save();
             $new_password = 'rebouh';
 
@@ -195,7 +195,7 @@
         //     $name = "Tyler";
         //     $isadmin = true;
         //     $password = "howdy";
-        //     $test_user = new User($name, $isadmin, $password);
+        //     $test_user = new User($name, $password, $isadmin);
         //
         //     $text = 'bla bla plein de chose à dire';
         //     $message = new Message($text);
@@ -209,14 +209,14 @@
         function test_delete()
         {
             $name = "Tyler";
-            $isAdmin = TRUE;
+            $isadmin = TRUE;
             $password = "howdy";
-            $test_user = new User($name, $isAdmin, $password);
+            $test_user = new User($name, $password, $isadmin);
             $test_user->save();
 
             $name2 = "Richard";
             $password2 = "bouh";
-            $test_user2 = new User($name2, $isAdmin, $password2);
+            $test_user2 = new User($name2, $password, $isadmin);
             $test_user2->save();
 
             $test_user2->delete();
@@ -228,13 +228,13 @@
         {
             $name = "Conor";
             $password = "big butts";
-            $isAdmin = True;
-            $test_user = new User($name, $isAdmin, $password);
+            $isadmin = True;
+            $test_user = new User($name, $password, $isadmin);
             $test_user->save();
 
             $name2 = "Connie";
             $password2 = "Conor girl version";
-            $test_user2 = new User($name2, $isAdmin, $password2);
+            $test_user2 = new User($name2, $password, $isadmin);
             $test_user2->save();
 
             User::deleteAll();
