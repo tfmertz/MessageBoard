@@ -7,16 +7,17 @@
 */
 
     require_once 'src/User.php';
-    // require_once 'src/Message.php';
+    require_once 'src/Message.php';
 
     $DB = new PDO("pgsql:host=localhost;dbname=message_test");
+
 
     class UserTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
          {
             User::deleteAll();
-            //Mesage::deleteAll();
+            Message::deleteAll();
          }
 
         function test_getName()
@@ -163,32 +164,34 @@
         //     $name = "Tyler";
         //     $isadmin = true;
         //     $password = "howdy";
-        //     $test_user = new User($name, $isadmin, $password);
+        //     $test_user = new User($name, $password, $isadmin);
+        //     $test_user->save();
         //     $new_password = 'rebouh';
         //
-
-        //     $test_user->updatePassword($new_id);
+        //     $test_user->updatePassword($new_password);
         //     $result = $test_user->getPassword();
         //
         //     $this->assertEquals($new_password, $result);
         // }
 
+        function test_getMessages()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $password, $isadmin);
+            $test_user->save();
 
-        // function test_getMessages()
-        // {
-        //     $name = "Tyler";
-        //     $isadmin = true;
-        //     $password = "howdy";
-        //     $test_user = new User($name, $password, $isadmin);
-        //
-        //     $text = 'bla bla plein de chose à dire';
-        //     $message = new Message($text);
-        //     $message->save();
-        //
-        //     $result = $test_user->getMessages();
-        //
-        //     $this->assertEquals([$message], $result);
-        // }
+            $text = 'bla bla plein de chose à dire';
+            $date = "2014-11-11 12:45:34";
+            $user_id = $test_user->getId();
+            $message = new Message($text, $date, $user_id);
+            $message->save();
+
+            $result = $test_user->getMessages();
+
+            $this->assertEquals([$message], $result);
+        }
 
         function test_delete()
         {
@@ -198,14 +201,17 @@
             $test_user = new User($name, $password, $isadmin);
             $test_user->save();
 
-            $name2 = "Richard";
-            $password2 = "bouh";
-            $test_user2 = new User($name2, $password, $isadmin);
+            $name2 = "Mike";
+            $isadmin2 = true;
+            $password2 = "epicodus";
+            $test_user2 = new User($name2, $password2, $isadmin2);
             $test_user2->save();
 
-            $test_user2->delete();
-            $result = User::getAll();
-            $this->assertEquals([$test_user], $result);
+            $check_name = "Must be false";
+
+            $result= User::checkAvailable($check_name);
+
+           $this->assertEquals("failed", $result);
         }
 
         function test_deleteAll()
@@ -226,6 +232,40 @@
 
             $this->assertEquals([], $result);
         }
+
+        function test_checkAvailable($username)
+        {
+
+        }
+
+        function test_checkLogin($username, $password)
+        {
+
+        }
+
+        // function test_checkLogInCheckFunction()
+        // {
+        //     $name = "Tyler";
+        //     $isadmin = true;
+        //     $password = "howdy";
+        //     $test_user = new User($name, $password, $isadmin);
+        //     $test_user->save();
+        //
+        //     $name2 = "Mike";
+        //     $isadmin2 = true;
+        //     $password2 = "epicodus";
+        //     $test_user2 = new User($name2, $password2, $isadmin2);
+        //     $test_user2->save();
+        //
+        //
+        //     $check_user_name = "Must be false";
+        //     $check_user_password = "nothing";
+        //
+        //     //$result= User::logInCheck($check_user_name, $check_user_password);
+        //     $result = User::logInCheck($name, $password);
+        //     echo $result;
+        //    //$this->assertEquals("failed", $result);
+        // }
     }
 
 
