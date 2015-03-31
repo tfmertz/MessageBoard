@@ -22,7 +22,7 @@
 
         function setMessageId($new_id)
         {
-             $this->message_id = $new_id;
+             $this->message_id = (string) $new_id;
         }
 
         function getUserId()
@@ -71,13 +71,18 @@
         static function getAll()
         {
             $returned_messages = $GLOBALS['DB']->query("SELECT * FROM messages;");
+            $result = $returned_messages->fetchAll(PDO::FETCH_ASSOC);
+            //var_dump($result);
+
             $messages = array();
-            foreach($returned_messages as $message) {
-                $message = $message['message'];
+
+            foreach($result as $message)
+            {
+                $text = $message['message'];
                 $message_id = $message['id'];
                 $date = $message['created'];
                 $user_id = $message['user_id'];
-                $new_message = new Message($message, $date, $user_id, $message_id);
+                $new_message = new Message($text, $date, $user_id, $message_id);
                 array_push($messages, $new_message);
             }
             return $messages;
@@ -105,13 +110,13 @@
         function addTag($tag)
         {
             $GLOBALS['DB']->exec("INSERT INTO messages_tags (message_id, tag_id) VALUES
-            ({$this->getMessageId()}, {$tag->getTagId()});");
+            ({$this->getMessageId()}, {$tag->getId()});");
         }
 
         function getTags()
         {
-            $query = $GLOBALS['DB']->query("SELECT tags.* FROM messages JOIN messsages_tags ON (message.id = messages_tags.message_id)
-             JOIN  tags ON (messages_tags.tag_id = tags.id) WHERE message.id = {$this->getMessageId()} ");
+            $query = $GLOBALS['DB']->query("SELECT tags.* FROM messages JOIN messages_tags ON (messages.id = messages_tags.message_id)
+             JOIN  tags ON (tags.id = messages_tags.tag_id) WHERE messages.id = {$this->getMessageId()} ;");
             $message_tags = $query->fetchAll(PDO::FETCH_ASSOC);
             $tags = array();
             foreach($message_tags as $message_tag) {

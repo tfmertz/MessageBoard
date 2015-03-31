@@ -54,6 +54,49 @@ class Tag
          return $tag_array;
        }
 
+        static function findById($search_id)
+       {
+           $statement = $GLOBALS['DB']->query("SELECT * FROM tags WHERE id =$search_id;");
+           $tags_id = $statement->fetchAll(PDO::FETCH_ASSOC);
+           $tags = null;
+           foreach($tags_id as $row)
+           {
+               $id = $row['id'];
+               $name = $row['name'];
+               $new_tag = new Tag($name, $id);
+               $tags = $new_tag;
+           }
+           return $tags;
+       }
+       function getMessages()
+       {
+           $statement = $GLOBALS['DB']->query("SELECT messages.* FROM tags
+           JOIN messages_tags ON (tags.id = messages_tags.tag_id)
+           JOIN messages ON (messages.id = message_tags.message_id)
+           WHERE tags.id = {$this->getId()};");
+           $tags_message = $statement->fetchAll(PDO::FETCH_ASSOC);
+           $message_array = array();
+           foreach ($tags_message as $message)
+           {
+               $mess = $message['message'];
+               $date = $message['created'];
+               $id = $message['id'];
+               $user_id = $message['user_id'];
+               $new_message = new Message($mess,$date,$user_id,$id);
+               array_push($message_array, $new_message);
+           }
+            return $message_array;
+
+
+       }
+
+       function addMessage($message)
+       {
+
+           $GLOBALS['DB']->query("INSERT INTO messages_tags (message_id,tag_id) values ({$message->getMessageId()},{$this->getId()}) ;");
+       }
+
+
 
 
 

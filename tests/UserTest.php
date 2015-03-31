@@ -159,20 +159,21 @@
         }
 
 
-        // function test_updatePassword()
-        // {
-        //     $name = "Tyler";
-        //     $isadmin = true;
-        //     $password = "howdy";
-        //     $test_user = new User($name, $password, $isadmin);
-        //     $test_user->save();
-        //     $new_password = 'rebouh';
-        //
-        //     $test_user->updatePassword($new_password);
-        //     $result = $test_user->getPassword();
-        //
-        //     $this->assertEquals($new_password, $result);
-        // }
+
+        function test_updatePassword()
+        {
+            $name = "Tyler";
+            $isadmin = true;
+            $password = "howdy";
+            $test_user = new User($name, $password, $isadmin);
+            $test_user->save();
+            $new_password = 'rebouh';
+
+            $test_user->updatePassword($new_password);
+            $result = $test_user->getPassword();
+
+            $this->assertEquals($new_password, $result);
+        }
 
         function test_getMessages()
         {
@@ -187,6 +188,7 @@
             $user_id = $test_user->getId();
             $message = new Message($text, $date, $user_id);
             $message->save();
+
 
             $result = $test_user->getMessages();
 
