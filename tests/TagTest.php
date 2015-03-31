@@ -7,8 +7,8 @@
     require_once 'src/Tag.php';
     require_once 'src/Message.php';
 
-
     $DB = new PDO("pgsql:host=localhost;dbname=message_test");
+
 
     class TagTest extends PHPUnit_Framework_TestCase
     {

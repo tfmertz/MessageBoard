@@ -87,23 +87,53 @@
 
         function getMessages()
         {
-            $statement = $GLOBALS['DB']->query("SELECT messages.* FROM users
-                                    JOIN users_messages ON (users.id = users_messages.user_id)
-                                    JOIN messages ON (messages.id = users_messages.message_id)
-                                    WHERE id = {$this->getId()};");
-            $returned_messages = $statement->fetAll(PDO::FETCH_ASSOC);
+            $returned_messages = $GLOBALS['DB']->query("SELECT * FROM messages WHERE user_id = {$this->getId()};");
             $messages = [];
             foreach($returned_messages as $message)
             {
-                $text = $message['text'];
+                var_dump($message);
+                $text = $message['message'];
+                $date = $message['created'];
+                $user_id = $message['user_id'];
                 $id = $message['id'];
-                $new_message = new Message($text, $id);
+                $new_message = new Message($text, $date, $user_id, $id);
+                var_dump($new_message);
                 array_push($messages, $new_message);
             }
+            var_dump($messages);
             return $messages;
         }
 
+        static function checkAvailable($check_user_name)
+        {
+            $user_names=[];
+            $all_users= User::getAll();
 
+            foreach($all_users as $user){
+                $user_name= $user->getName();
+                array_push($user_names, $user_name);
+            }
+
+        if (in_array($check_user_name, $user_names, TRUE))
+        {
+            $result="fail";
+            break;
+        } else $result= "passed";
+        return $result;
+        }
+
+        static function logInCheck($user_name, $password)
+        {
+            $all_users= User::getAll();
+
+            foreach($all_users as $user){
+
+                if (($user->getName() == $user_name) && ($user->getPassword() == $password)){
+                    $check = "passed"; break;
+                } else $check = "failed";
+            }
+            return $check2;
+        }
 
 
     }
