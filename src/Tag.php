@@ -35,7 +35,25 @@
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
-      
+      function deleteAll()
+      {
+          $GLOBALS['DB']->exec("DELETE FROM tags*;");
+
+      }
+      function getAll()
+      {
+         $return_tags =  $GLOBALS['DB']->query("SELECT * FROM tags");
+         $tag_array = array();
+         foreach($return_tags as $tag)
+         {
+             $name = $tag['name'];
+             $id = $tag['id'];
+             $new_tag = new Tags($name,$id);
+             array_push($tag_array, $new_tag);
+         }
+         return $tag_array;
+     }
+
  }
 
 
