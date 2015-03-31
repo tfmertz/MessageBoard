@@ -5,6 +5,7 @@
 */
 
     require_once 'src/Tag.php';
+    require_once 'src/Message.php';
 
 
     $DB = new PDO("pgsql:host=localhost;dbname=message_test");
@@ -158,9 +159,23 @@
                   $this->assertEquals([$test_tags], $result);
               }
 
-             function getMessage()
+             function test_getMessages()
              {
-                 
+                     $user_id = 10000;
+                     $date = " 10 23 ";
+                     $text = 'where are you coming from';
+                     $message = new Message($user_id,$text,$date);
+                     $message->save();
+
+                     $name = "Bar";
+                     $test_tag = new Tag($name);
+                     $test_tag->save();
+
+                     $result = $test_tag->getMessages();
+
+                     $this->assertEquals([$message], $result);
+
+
              }
 
 

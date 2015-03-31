@@ -68,7 +68,7 @@ class Tag
            }
            return $tags;
        }
-       function getMessage()
+       function getMessages()
        {
            $statement = $GLOBALS['DB']->query("SELECT messages.* FROM tags
            JOIN messages_tags ON(tags.id = messages_tags.tag_id)
