@@ -165,6 +165,7 @@
         //     $test_user = new User($name, $isadmin, $password);
         //     $new_password = 'rebouh';
         //
+
         //     $test_user->updatePassword($new_id);
         //     $result = $test_user->getPassword();
         //
