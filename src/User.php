@@ -49,7 +49,7 @@
         }
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO users (name, isAdmin, password) VALUES ('{$this->getName()}', '{$this->getIsAdmin()}', '{$thiq->getPassword()}') RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO users (name, admin, password) VALUES ('{$this->getName()}', '{$this->getIsAdmin()}', '{$this->getPassword()}') RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
@@ -75,10 +75,10 @@
             $users = [];
             foreach ($returned_users as $user) {
                $name = $user['name'];
-               $isAdmin = $user['isAdmin'];
+               $isAdmin = $user['admin'];
                $password = $user['password'];
                $id = $user['id'];
-               $new_user = new User(name, isAdmin, password, id);
+               $new_user = new User($name, $isAdmin, $password, $id);
                array_push($users, $new_user);
             }
             return $users;
