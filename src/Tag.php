@@ -68,6 +68,27 @@ class Tag
            }
            return $tags;
        }
+       function getMessage()
+       {
+           $statement = $GLOBALS['DB']->query("SELECT messages.* FROM tags
+           JOIN messages_tags ON(tags.id = messages_tags.tag_id)
+           JOIN messages ON (messages.id = message_tags.message_id)
+           WHERE tags.id = {$this->getId()};");
+           $tags_message = $statement->fetchAll(PDO::FETCH_ASSOC);
+           $message_array = array();
+           foreach ($tags_message as $message)
+           {
+               $mess = $message['message'];
+               $date = $message['created'];
+               $id = $message['id'];
+               $user_id = $message['user_id'];
+               $new_message = new Message($mess,$date,$user_id,$id);
+               array_push($message_array, $new_message);
+           }
+            return $message_array;
+
+
+       }
 
 
 

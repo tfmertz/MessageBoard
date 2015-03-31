@@ -18,7 +18,7 @@
 
             function test_getMessage()
             {
-                
+
             }
 
              function test_finByid()
@@ -158,6 +158,10 @@
                   $this->assertEquals([$test_tags], $result);
               }
 
+             function getMessage()
+             {
+                 
+             }
 
 
 
