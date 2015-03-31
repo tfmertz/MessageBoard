@@ -7,9 +7,9 @@
         private $password;
         private $id;
 
-        function __construct($new_name, $isAdmin, $password, $id = null)
+        function __construct($name, $isAdmin, $password, $id = null)
         {
-            $this->name = $new_name;
+            $this->name = $name;
             $this->isAdmin = $isAdmin;
             $this->password = $password;
             $this->id = $id;
