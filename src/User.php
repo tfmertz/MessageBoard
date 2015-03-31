@@ -109,30 +109,40 @@
             $user_names=[];
             $all_users= User::getAll();
 
-            foreach($all_users as $user){
-                $user_name= $user->getName();
-                array_push($user_names, $user_name);
-            }
+        foreach($all_users as $user){
+            $user_name= $user->getName();
+            array_push($user_names, $user_name);
+        }
 
+        $result = false;
         if (in_array($check_user_name, $user_names, TRUE))
         {
-            $result="fail";
-            break;
-        } else $result= "passed";
-        return $result;
+            $result = true;
+
+        }
+        if($result)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
         }
 
         static function logInCheck($user_name, $password)
         {
-            $all_users= User::getAll();
 
-            foreach($all_users as $user){
-
-                if (($user->getName() == $user_name) && ($user->getPassword() == $password)){
-                    $check = "passed"; break;
-                } else $check = "failed";
+            $statement = $GLOBALS['DB']->query("SELECT * FROM users WHERE name = '$user_name' AND password= '$password';");
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $match_user = null;
+            foreach ($results as $result) {
+                $match_user = new User($result['name'], $result['password'], $result['admin'], $result['id']);
             }
-            return $check2;
+            return $match_user;
+
+
+
         }
 
 
