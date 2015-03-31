@@ -1,9 +1,7 @@
 <?php
 
-    class Message
-    {
-        <?php
 
+    
     class Message
     {
         private $message_id;
