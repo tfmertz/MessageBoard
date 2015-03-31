@@ -209,11 +209,10 @@
             $test_user2 = new User($name2, $password2, $isadmin2);
             $test_user2->save();
 
-            $check_name = "Must be false";
+            $test_user2->delete();
+            $result = User::getAll();
 
-            $result= User::checkAvailable($check_name);
-
-           $this->assertEquals("failed", $result);
+           $this->assertEquals([$test_user], $result);
         }
 
         function test_deleteAll()
@@ -235,15 +234,15 @@
             $this->assertEquals([], $result);
         }
 
-        function test_checkAvailable($username)
-        {
-
-        }
-
-        function test_checkLogin($username, $password)
-        {
-
-        }
+        // function test_checkAvailable($username)
+        // {
+        //
+        // }
+        //
+        // function test_checkLogin($username, $password)
+        // {
+        //
+        // }
 
         // function test_checkLogInCheckFunction()
         // {

@@ -72,7 +72,7 @@ class Tag
        {
            $statement = $GLOBALS['DB']->query("SELECT messages.* FROM tags
            JOIN messages_tags ON (tags.id = messages_tags.tag_id)
-           JOIN messages ON (messages.id = message_tags.message_id)
+           JOIN messages ON (messages.id = messages_tags.message_id)
            WHERE tags.id = {$this->getId()};");
            $tags_message = $statement->fetchAll(PDO::FETCH_ASSOC);
            $message_array = array();
@@ -93,7 +93,8 @@ class Tag
        function addMessage($message)
        {
 
-           $GLOBALS['DB']->query("INSERT INTO messages_tags (message_id,tag_id) values ({$message->getMessageId()},{$this->getId()}) ;");
+           $GLOBALS['DB']->query("INSERT INTO messages_tags (message_id,tag_id)
+            values ({$message->getMessageId()},{$this->getId()}) ;");
        }
 
 
