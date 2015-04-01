@@ -44,20 +44,28 @@
 //****SIGN UP********SIGN UP********SIGN UP********SIGN UP****
 
     $app->post("/sign_up", function() use ($app) {
+        $alert_user_name_exit = $alert_2_words = "";
+            $user_name = $_POST['username'];
+            if (str_word_count($user_name)==1)
+            {
+                if (User::checkAvailable($user_name))
+                    {
+                        $password= $_POST['password'];
+                        $new_user = new User($user_name, $password);
+                        $new_user->save();
+                    }
+                    else
+                    {
+                        $alert_user_name_exit= "This username is taken.";
+                    }
+            }
+            else
+            {
+                $alert_2_words= "Usernames must be ONE word.";
+            }
 
-        // if (!$_POST['username']){
-        //     $user_name = $_POST['username'];
-        //     if (str_word_count($user_name)>1){
-        //         if (User::checkAvailable($user_name))
-        //             {
-        //                 $password= $_POST['password'];
-        //                 $new_user = new User($user_name, $password);
-        //                 $new_user->save();
-        //             } else $alert= "this User name is already exit. Please choose another User name";
-        //         } else $alert= "cannot space two words";
-        //     } else $alert= "please fill in the user name";
 
-    return $app['twig']->render('sign_up.twig', array());
+    return $app['twig']->render('sign_up.twig', array('alert1' => $alert_user_name_exit, 'alert2' => $alert_2_words));
     });
 
 //********LOGIN****************LOGIN****************LOGIN***********
