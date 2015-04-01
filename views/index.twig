@@ -9,14 +9,23 @@
         <div class="container">
             <div class="row">
 
-
                 <div class="col-md-12">
                     <div class="text-center">
 
                     <h1>Welcome to the Message Board</h1>
+
+
+                    {% if error == "true" %}
+
+                        <div class="text-danger">
+                            <h3>Invalid Input</h3>
+                        </div>
+
+                    {% endif %}
+
                     <h5>Login if you are a member:</h5>
 
-                    <form action="/messages" method="post">
+                    <form action="/login" method="post">
                         <p>
                         <label name="username">Username:</label>
                         <input type="text" name="username" id="username" required>
