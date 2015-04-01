@@ -5,23 +5,24 @@
     </head>
     <body>
         <div class='container'>
+            <h1>Welcome to Message Board</h1>
 
             <form action="/add_message" method="post">
-                <label for="message">New post :</label> <br>
-                <select name='tag' type='text'>
-          {% for tag in all_tags %}
-            <option value="{{ tag.getId }}"> {{ tag.getName }} </option>
-          {% endfor %}
-        </select>
-                <input type="hidden" name="user_id" value="{ user.getId }">
-                <textarea rows="4" cols="50" name='message'> </textarea>
-                <button type="submit">Add Message</button>
+                    <label for="message">New post :</label> <br>
+                    <select name='tag' type='text'>
+                      {% for tag in all_tags %}
+                        <option value="{{ tag.getId }}"> {{ tag.getName }} </option>
+                      {% endfor %}
+                    </select>
+                    <input type="hidden" name="user_id" value="{ user.getId }">
+                    <textarea rows="4" cols="50" name='message'> </textarea>
+                    <button type="submit">Add Message</button>
             </form>
 
             <hr size="1">
 
             <h3>Tags</h3>
-            {% for tag in tags %}
+            {% for tag in all_tags %}
                 <a href="/messages/{{ tag.getId }}"><h4>{{ tag.getName }}</h4></a>
             {% endfor %}
 

@@ -12,55 +12,76 @@
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
     ));
+
+    //information for patch/delete requests and silex forward
     use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpKernel\HttpKernelInterface;
     Request::enableHttpMethodParameterOverride();
 
 
     //Route to home page
-    // $app->get("/", function() use ($app) {
-    //
-    //
-    //
-    //     return $app['twig']->render('index.twig');
-    // });
+    $app->get("/", function(Request $request) use ($app) {
+        $error = "false";
 
+        $query = $request->query->all();
 
-    // $app->post("/messages", function() use ($app) {
-    //     $user = null;
-    //
-    //     return $app['twig']->render('messages.twig', array('user' => $user));
-    // });
-    // $date = now();
-    // $message = new Message($text, $user_id, $date);
+        if($query) {
+            $error = $query['error'];
+        }
 
+        return $app['twig']->render('index.twig', array('error' => $error));
+    });
 
 
 //****SIGN UP********SIGN UP********SIGN UP********SIGN UP****
 
+    $app->get('/sign_up', function() use ($app) {
+
+        return $app['twig']->render('sign_up.twig', array('error' => ""));
+    });
+
     $app->post("/sign_up", function() use ($app) {
+        $error = "";
 
-        if (!$_POST['username']){
-            $user_name = $_POST['username'];
-            if (str_word_count($user_name)>1){
-                if (User::checkAvailable($user_name))
-                    {
-                        $password= $_POST['password'];
-                        $new_user = new User($user_name, $password);
-                        $new_user->save();
-                    } else $alert= "this User name is already exit. Please choose another User name";
-                } else $alert= "cannot space two words";
-            } else $alert= "please fill in the user name";
+        $user_name = $_POST['username'];
+        if (str_word_count($user_name) == 1)
+        {
+            if (User::checkAvailable($user_name))
+            {
+                $password= $_POST['password'];
+                $new_user = new User($user_name, $password);
+                $new_user->save();
+            }
+            else
+            {
+                $error = "This username is taken.";
+            }
+        }
+        else
+        {
+            $error = "Usernames must be ONE word.";
+        }
 
-    return $app['twig']->render('sign_up.twig', array());
+
+        return $app['twig']->render('sign_up.twig', array('error' => $error));
     });
 
 //********LOGIN****************LOGIN****************LOGIN***********
 
-    $app->post("/login", function() use ($app) {
+    $app->post("/", function() use ($app) {
 
-        if (!$_POST['username'] && !$_POST['password'] ){
-            $user_name = $_POST['username'];
-            $password= $_POST['password'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $user = User::logInCheck($username, $password);
+        if($user) {
+            $subRequest = Request::create('/messages', 'GET', array('user' => $user));
+
+            return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+        } else {
+            $error = "true";
+            $subRequest = Request::create('/', 'GET', array('error' => $error));
+
+            return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST, true);
         }
 
         return $app['twig']->render('login.html.twig', array());
@@ -78,12 +99,20 @@
    //  $hiking->save();
    // }
 
-    $app->get("/", function() use ($app) {
-        $user_id = 3;
-        $user = User::find($user_id);
+    $app->get("/messages", function(Request $request) use ($app) {
+
+        $query = $request->query->all();
+
+        if(empty($query)) {
+            return $app->redirect('/');
+        } else {
+            $user = $query['user'];
+        }
+
         $tags = Tag::getAll();
-        return $app['twig']->render('messages.html.twig', array('tags' => $tags, 'user_id' => $user_id, 'user' => $user,
+        return $app['twig']->render('messages.html.twig', array('tags' => $tags, 'user' => $user,
         'messages' => Message::getAll(), 'all_tags' => Tag::getAll(), 'users'=>User::getAll()));
+
     });
 
 
@@ -100,7 +129,7 @@
         $tags = Tag::getAll();
 
 
-        return $app['twig']->render('messages.html.twig', array('tags' => $tags, 'user_id' => $user_id, 'user' => $user, 'messages' => Message::getAll(), 'all_tags' => Tag::getAll()));
+        return $app['twig']->render('messages.html.twig', array('users' => User::getAll(), 'user' => $user, 'messages' => Message::getAll(), 'all_tags' => Tag::getAll()));
     });
 
 

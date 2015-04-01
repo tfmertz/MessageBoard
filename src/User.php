@@ -7,7 +7,7 @@
         private $password;
         private $id;
 
-        function __construct($name, $password, $isAdmin = false, $id = null)
+        function __construct($name, $password, $isAdmin = 'false', $id = null)
         {
             $this->name = $name;
             $this->isAdmin = $isAdmin;
@@ -106,28 +106,10 @@
 
         static function checkAvailable($check_user_name)
         {
-            $user_names=[];
-            $all_users= User::getAll();
+            $statement = $GLOBALS['DB']->query("SELECT * FROM users WHERE name = '$check_user_name';");
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach($all_users as $user){
-            $user_name= $user->getName();
-            array_push($user_names, $user_name);
-        }
-
-        $result = false;
-        if (in_array($check_user_name, $user_names, TRUE))
-        {
-            $result = true;
-
-        }
-        if($result)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+            return empty($results);
         }
 
         static function logInCheck($user_name, $password)

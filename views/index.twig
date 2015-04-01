@@ -9,11 +9,40 @@
         <div class="container">
             <div class="row">
 
-
                 <div class="col-md-12">
+                    <div class="text-center">
 
-                    hey
+                    <h1>Welcome to the Message Board</h1>
 
+
+                    {% if error == "true" %}
+
+                        <div class="text-danger">
+                            <h3>Invalid Input</h3>
+                        </div>
+
+                    {% endif %}
+
+                    <h5>Login if you are a member:</h5>
+
+                    <form action="/" method="post">
+                        <p>
+                        <label name="username">Username:</label>
+                        <input type="text" name="username" id="username" required>
+                        </p>
+
+                        <p>
+                        <label name="password">Password</label>
+                        <input type="password" name="password" id="password" required>
+                        </p>
+                        <button class="btn btn-primary" type="submit">Log in</button>
+                    </form>
+                    <br>
+
+                    <a class="btn btn-default" href="/sign_up">Sign up!</a>
+
+
+                </div>
                 </div>
             </div>
         </div>
