@@ -18,6 +18,13 @@
                 <button type="submit">Add Message</button>
             </form>
 
+            <h3>Tags</h3>
+            {% for tag in tags %}
+                <a href="/messages/{{ tag.getId }}"><h4>{{ tag.getName }}</h4></a>
+            {% endfor %}
+
+            <hr size="1">
+
             {% if messages is not empty %}
 
                 {% for message in messages %}

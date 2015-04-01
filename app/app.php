@@ -81,8 +81,8 @@
     $app->get("/", function() use ($app) {
         $user_id = 3;
         $user = User::find($user_id);
-
-        return $app['twig']->render('messages.html.twig', array('user_id' => $user_id, 'user' => $user, 'messages' => Message::getAll(), 'all_tags' => Tag::getAll()));
+        $tags = Tag::getAll();
+        return $app['twig']->render('messages.html.twig', array('tags' => $tags, 'user_id' => $user_id, 'user' => $user, 'messages' => Message::getAll(), 'all_tags' => Tag::getAll()));
     });
 
 
@@ -96,8 +96,22 @@
         $new_message = new Message($message, $date, $user_id);
         $new_message->save();
         $new_message->addTag($tag);
+        $tags = Tag::getAll();
 
-        return $app['twig']->render('messages.html.twig', array('user_id' => $user_id, 'user' => $user, 'messages' => Message::getAll(), 'all_tags' => Tag::getAll()));
+
+        return $app['twig']->render('messages.html.twig', array('tags' => $tags, 'user_id' => $user_id, 'user' => $user, 'messages' => Message::getAll(), 'all_tags' => Tag::getAll()));
+    });
+
+
+    $app->get("/messages/{tag_id}", function($tag_id) use ($app) {
+        $tag = Tag::findById($tag_id);
+        $messages = $tag->getMessages();
+        $tags = Tag::getAll();
+        foreach ($messages as $message) {
+            $user_id = $message->getUserId();
+            $user = User::find($user_id);
+        }
+        return $app['twig']->render('tag_messages.html.twig', array('tag' => $tag, 'user' => $user, 'tags' => $tags, 'messages' => $messages));
     });
 
 
