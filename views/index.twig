@@ -11,9 +11,31 @@
 
 
                 <div class="col-md-12">
+                    <div class="text-center">
 
-                    hey
+                    <h1>Welcome to the Message Board</h1>
+                    <h5>Login if you are a member:</h5>
 
+                    <form action="/messages" method="post">
+                        <p>
+                        <label name="username">Username:</label>
+                        <input type="text" name="username" id="username" required>
+                        </p>
+
+                        <p>
+                        <label name="password">Password</label>
+                        <input type="text" name="password" id="password" required>
+                        </p>
+                        <button type="submit">Log in</button>
+                    </form>
+
+                    <p>
+                    <form action="/sign_up" method="post">
+                        <button type="submit">Sign up!</button>
+                    </form>
+
+                    </p>
+                </div>
                 </div>
             </div>
         </div>

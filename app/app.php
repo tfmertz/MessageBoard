@@ -55,11 +55,11 @@
 //********LOGIN****************LOGIN****************LOGIN***********
 
     $app->post("/login", function() use ($app) {
-
+        $alert="";
         if (!$_POST['username'] && !$_POST['password'] ){
             $user_name = $_POST['username'];
             $password= $_POST['password'];
-        }
+        } else { $alert="user name and password do not match, try again or sign up new account";}
 
     return $app['twig']->render('login.twig', array());
     });
