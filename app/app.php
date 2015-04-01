@@ -7,7 +7,7 @@
     $app = new Silex\Application();
     $app['debug'] = true;
 
-    $DB = new PDO('pgsql:host=localhost;dbname=messageBoard');
+    $DB = new PDO('pgsql:host=localhost;dbname=message_board');
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
@@ -18,15 +18,26 @@
 
     //Route to home page
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig');
+
+
+
+        return $app['twig']->render('index.twig');
+    });
+
+
+    $app->post("/messages", function() use ($app) {
+        $user = null;
+
+        return $app['twig']->render('messages.twig', array('user' => $user));
     });
     $date = now();
     $message = new Message($text, $user_id, $date);
 
 
+
 //****SIGN UP********SIGN UP********SIGN UP********SIGN UP****
 
-    $app->post("/signUp", function() use ($app) {
+    $app->post("/sign_up", function() use ($app) {
 
         if (!$_POST['username']){
             $user_name = $_POST['username'];
@@ -40,19 +51,19 @@
                 } else $alert= "cannot space two words";
             } else $alert= "please fill in the user name";
 
-    return $app['twig']->render('??????.html.twig', array(??????????);
+    return $app['twig']->render('sign_up.twig', array());
     });
 
-//********SIGN IN****************SIGN IN****************SIGN IN***********
+//********LOGIN****************LOGIN****************LOGIN***********
 
-    $app->post("/signIp", function() use ($app) {
+    $app->post("/login", function() use ($app) {
 
         if (!$_POST['username'] && !$_POST['password'] ){
             $user_name = $_POST['username'];
             $password= $_POST['password'];
+        }
 
-
-    return $app['twig']->render('??????.html.twig', array(??????????);
+        return $app['twig']->render('login.html.twig', array());
     });
 
     // route for messages>twig
@@ -62,9 +73,7 @@
         $date = now();
 
 
-
-
-    return $app['twig']->render('??????.html.twig', array(??????????);
+        return $app['twig']->render('messages.html.twig', array());
     });
 
 
