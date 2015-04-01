@@ -140,9 +140,20 @@
                 $match_user = new User($result['name'], $result['password'], $result['admin'], $result['id']);
             }
             return $match_user;
+        }
 
 
-
+        static function find($search_id)
+        {
+            $found_user = null;
+            $users = User::getAll();
+            foreach($users as $user) {
+                $user_id = $user->getID();
+                if ($user_id == $search_id) {
+                  $found_user = $user;
+                }
+            }
+            return $found_user;
         }
 
 

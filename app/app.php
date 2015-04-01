@@ -17,21 +17,21 @@
 
 
     //Route to home page
-    $app->get("/", function() use ($app) {
+    // $app->get("/", function() use ($app) {
+    //
+    //
+    //
+    //     return $app['twig']->render('index.twig');
+    // });
 
 
-
-        return $app['twig']->render('index.twig');
-    });
-
-
-    $app->post("/messages", function() use ($app) {
-        $user = null;
-
-        return $app['twig']->render('messages.twig', array('user' => $user));
-    });
-    $date = now();
-    $message = new Message($text, $user_id, $date);
+    // $app->post("/messages", function() use ($app) {
+    //     $user = null;
+    //
+    //     return $app['twig']->render('messages.twig', array('user' => $user));
+    // });
+    // $date = now();
+    // $message = new Message($text, $user_id, $date);
 
 
 
@@ -67,13 +67,37 @@
     });
 
     // route for messages>twig
+
+   //  $data_brands = Tag::getAll();
+   //  if($data_tags == []) {
+   //     $bar = new Tag("Bar");
+   //     $bar->save();
+   //     $meeting = new Tag("Meeting");
+   //     $meeting->save();
+   //     $hiking = new Tag("Hiking");
+   //  $hiking->save();
+   // }
+
+    $app->get("/", function() use ($app) {
+        $user_id = 3;
+        $user = User::find($user_id);
+
+        return $app['twig']->render('messages.html.twig', array('user_id' => $user_id, 'user' => $user, 'messages' => Message::getAll(), 'all_tags' => Tag::getAll()));
+    });
+
+
     $app->post("/add_message", function() use ($app) {
-        $user_id = $_POST['user_id'];
+        $user_id = 3;
+        $user = User::find($user_id);
         $message = $_POST['message'];
-        $date = now();
+        $tag_id = $_POST['tag'];
+        $tag = Tag::findById($tag_id);
+        $date = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+        $new_message = new Message($message, $date, $user_id);
+        $new_message->save();
+        $new_message->addTag($tag);
 
-
-        return $app['twig']->render('messages.html.twig', array());
+        return $app['twig']->render('messages.html.twig', array('user_id' => $user_id, 'user' => $user, 'messages' => Message::getAll(), 'all_tags' => Tag::getAll()));
     });
 
 

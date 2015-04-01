@@ -47,6 +47,11 @@
 
         function getDate()
         {
+            return $this->date->format('Y-m-d H:i:s');
+        }
+
+        function getTheDate()
+        {
             return $this->date;
         }
 
@@ -70,7 +75,7 @@
 
         static function getAll()
         {
-            $returned_messages = $GLOBALS['DB']->query("SELECT * FROM messages;");
+            $returned_messages = $GLOBALS['DB']->query("SELECT * FROM messages ORDER BY created DESC;");
             $result = $returned_messages->fetchAll(PDO::FETCH_ASSOC);
             //var_dump($result);
 

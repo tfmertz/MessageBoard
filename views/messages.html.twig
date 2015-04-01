@@ -7,9 +7,15 @@
         <div class='container'>
 
             <form action="/add_message" method="post">
-                <label for="message">New post :</label>
+                <label for="message">New post :</label> <br>
+                <select name='tag' type='text'>
+          {% for tag in all_tags %}
+            <option value="{{ tag.getId }}"> {{ tag.getName }} </option>
+          {% endfor %}
+        </select>
                 <input type="hidden" name="user_id" value="{ user.getId }">
                 <textarea rows="4" cols="50" name='message'> </textarea>
+                <button type="submit">Add Message</button>
             </form>
 
             {% if messages is not empty %}
@@ -17,8 +23,19 @@
                 {% for message in messages %}
 
                 <h3>{{ user.getName }}</h3>
-                <p>{{ message.getDate }}</p>
-                <h4>{{ message.getTags }}</h4>
+                <p>{{ message.getTheDate }}</p>
+
+                {% if message.getTags is not empty %}
+
+                    {% for tag in message.getTags %}
+
+                        <p>
+                            {{ tag.getName() }}
+                        </p>
+                    {% endfor %}
+
+                {% endif %}
+
                 <textarea rows="4" cols="50" name='message'>{{ message.getMessage }}</textarea>
 
                 {% endfor %}

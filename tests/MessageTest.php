@@ -23,7 +23,7 @@
 
         function test_save_now()
         {
-            
+
         }
 
         function testGetMessage()
@@ -240,7 +240,7 @@
         {
             //Arrange
             $message = "Going to movie tomorrow";
-            $date = "2014-11-11 12:45:34";
+            $date = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
             $user_id = 3;
             $test_message = new Message($message,$date,$user_id);
             $test_message->save();
