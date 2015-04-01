@@ -7,7 +7,7 @@
     $app = new Silex\Application();
     $app['debug'] = true;
 
-    $DB = new PDO('pgsql:host=localhost;dbname=messageBoard');
+    $DB = new PDO('pgsql:host=localhost;dbname=message_board');
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
@@ -18,13 +18,24 @@
 
     //Route to home page
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig');
+
+
+
+        return $app['twig']->render('index.twig');
     });
+    
+
+    $app->post("/messages"), function() use ($app) {
+        $_POST['user_id'];
+
+        return $app['twig']->render('messages.twig', array('user' => $user));
+    });
+
 
 
 //****SIGN UP********SIGN UP********SIGN UP********SIGN UP****
 
-    $app->post("/signUp", function() use ($app) {
+    $app->post("/sign_up", function() use ($app) {
 
         if (!$_POST['username']){
             $user_name = $_POST['username'];
@@ -41,14 +52,14 @@
     return $app['twig']->render('??????.html.twig', array(??????????);
     });
 
-//********SIGN IN****************SIGN IN****************SIGN IN***********
+//********LOGIN****************LOGIN****************LOGIN***********
 
-    $app->post("/signIp", function() use ($app) {
+    $app->post("/login", function() use ($app) {
 
         if (!$_POST['username'] && !$_POST['password'] ){
             $user_name = $_POST['username'];
             $password= $_POST['password'];
-            
+
 
     return $app['twig']->render('??????.html.twig', array(??????????);
     });
