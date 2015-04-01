@@ -82,7 +82,8 @@
         $user_id = 3;
         $user = User::find($user_id);
         $tags = Tag::getAll();
-        return $app['twig']->render('messages.html.twig', array('tags' => $tags, 'user_id' => $user_id, 'user' => $user, 'messages' => Message::getAll(), 'all_tags' => Tag::getAll()));
+        return $app['twig']->render('messages.html.twig', array('tags' => $tags, 'user_id' => $user_id, 'user' => $user,
+        'messages' => Message::getAll(), 'all_tags' => Tag::getAll(), 'users'=>User::getAll()));
     });
 
 
@@ -115,6 +116,10 @@
     });
 
 
+    // $app->post("/user_messages", function() use ($app) {
+    //     $user_id = $_POST['user'];
+    //     return $app['twig']->render('tag_messages.html.twig', array('tag' => $tag, 'user' => $user, 'tags' => $tags, 'messages' => $messages));
+    // });
 
     return $app;
 ?>

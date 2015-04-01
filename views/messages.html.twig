@@ -18,10 +18,28 @@
                 <button type="submit">Add Message</button>
             </form>
 
+            <hr size="1">
+
             <h3>Tags</h3>
             {% for tag in tags %}
                 <a href="/messages/{{ tag.getId }}"><h4>{{ tag.getName }}</h4></a>
             {% endfor %}
+
+            <hr size="1">
+
+            <form action="/user_messages" method="post">
+
+                <h3>Users</h3>
+
+                <select name='user' type='text'>
+                    {% for user in users %}
+                        <option value="{{ user.getId }}"> {{ user.getName }} </option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit">View posts</button>
+
+            </form>
 
             <hr size="1">
 
