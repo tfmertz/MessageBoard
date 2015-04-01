@@ -43,41 +43,44 @@
 
 //****SIGN UP********SIGN UP********SIGN UP********SIGN UP****
 
+    $app->get('/sign_up', function() use ($app) {
+
+        return $app['twig']->render('sign_up.twig', array('error' => ""));
+    });
+
     $app->post("/sign_up", function() use ($app) {
-        $alert_user_name_exit = $alert_2_words = "";
-            $user_name = $_POST['username'];
-            if (str_word_count($user_name)==1)
+        $error = "";
+
+        $user_name = $_POST['username'];
+        if (str_word_count($user_name) == 1)
+        {
+            if (User::checkAvailable($user_name))
             {
-                if (User::checkAvailable($user_name))
-                    {
-                        $password= $_POST['password'];
-                        $new_user = new User($user_name, $password);
-                        $new_user->save();
-                    }
-                    else
-                    {
-                        $alert_user_name_exit= "This username is taken.";
-                    }
+                $password= $_POST['password'];
+                $new_user = new User($user_name, $password);
+                $new_user->save();
             }
             else
             {
-                $alert_2_words= "Usernames must be ONE word.";
+                $error = "This username is taken.";
             }
+        }
+        else
+        {
+            $error = "Usernames must be ONE word.";
+        }
 
 
-    return $app['twig']->render('sign_up.twig', array('alert1' => $alert_user_name_exit, 'alert2' => $alert_2_words));
+        return $app['twig']->render('sign_up.twig', array('error' => $error));
     });
 
 //********LOGIN****************LOGIN****************LOGIN***********
 
-    $app->post("/login", function() use ($app) {
+    $app->post("/", function() use ($app) {
 
         $username = $_POST['username'];
         $password = $_POST['password'];
         $user = User::logInCheck($username, $password);
-
-
-
         if($user) {
             $subRequest = Request::create('/messages', 'POST', array('user' => $user));
 
@@ -91,13 +94,7 @@
 
         return $app["twig"]->render('messages.twig', array('user' => $user));
 
-        // $alert="";
-        // if (!$username && !$_POST['password'] ){
-        //     $user_name = $_POST['username'];
-        //     $password= $_POST['password'];
-        // } else { $alert="user name and password do not match, try again or sign up new account";}
-        //
-        // return $app['twig']->render('login.twig', array('check' => $check));
+
     });
 
     return $app;

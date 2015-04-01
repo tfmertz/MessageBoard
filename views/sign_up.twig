@@ -7,32 +7,31 @@
     </head>
     <body>
         <form action='/sign_up' method='post'>
-        <fieldset >
-        <legend>Sign Up</legend><br>
+          <fieldset>
+            <legend>Sign Up</legend><br>
 
-        <label for='username' >User Name:</label>
-        <input type='text' name='username' id='username' minlength = "6" maxlength="50" placeholder = "at least 6 characters" />
-        <span class = "text-danger">
-            {{ alert1 }}
-        </span>
+            <label for='username' >User Name:</label>
+            <input type='text' name='username' id='username' minlength = "6" maxlength="50" placeholder = "at least 6 characters" />
+            <span class = "text-danger">
+                {{ error }}
+            </span>
 
-        <span class = "text-danger" >{{ alert2 }}</span>
 
-        <br><br>
+            <br><br>
 
-        <label for='password' >Password:</label>
-        <input type='password' name='password' id='password' minlength = "6" nmaxlength="50" placeholder= "at least 8 characters"/><br><br>
-        <input type='submit' name='Submit' value='Submit' />
-
+            <label for='password' >Password:</label>
+            <input type='password' name='password' id='password' minlength = "6" nmaxlength="50" placeholder= "at least 8 characters"/><br><br>
+            <input type='submit' name='Submit' value='Submit' />
 
 
 
+          </fieldset>
         </form>
-        <p>
-        <form action="/" method='get'>
-            <button>Go back home</button>
-        </form>
-    </p>
-        </fieldset>
+
+        <br>
+
+        <a class="btn btn-default" href="/">Return to Login</a>
+
+
     </body>
 </html>
