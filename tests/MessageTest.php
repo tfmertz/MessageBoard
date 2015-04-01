@@ -16,6 +16,16 @@
             Tag::deleteAll();
         }
 
+        function test_save_time()
+        {
+
+        }
+
+        function test_save_now()
+        {
+            
+        }
+
         function testGetMessage()
         {
             //Arrange

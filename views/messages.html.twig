@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Messages</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class='container'>
+
+            <form action="/add_message" method="post">
+                <label for="message">New post :</label>
+                <input type="hidden" name="user_id" value="{ user.getId }">
+                <textarea rows="4" cols="50" name='message'> </textarea>
+            </form>
+
+            {% if messages is not empty %}
+
+                {% for message in messages %}
+
+                <h3>{{ user.getName }}</h3>
+                <p>{{ message.getDate }}</p>
+                <h4>{{ message.getTags }}</h4>
+                <textarea rows="4" cols="50" name='message'>{{ message.getMessage }}</textarea>
+
+                {% endfor %}
+
+
+            {% endif %}
+
+        </div>
+    </body>
+</html>

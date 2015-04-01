@@ -20,6 +20,8 @@
     $app->get("/", function() use ($app) {
         return $app['twig']->render('index.html.twig');
     });
+    $date = now();
+    $message = new Message($text, $user_id, $date);
 
 
 //****SIGN UP********SIGN UP********SIGN UP********SIGN UP****
@@ -48,10 +50,24 @@
         if (!$_POST['username'] && !$_POST['password'] ){
             $user_name = $_POST['username'];
             $password= $_POST['password'];
-            
+
 
     return $app['twig']->render('??????.html.twig', array(??????????);
     });
+
+    // route for messages>twig
+    $app->post("/add_message", function() use ($app) {
+        $user_id = $_POST['user_id'];
+        $message = $_POST['message'];
+        $date = now();
+
+
+
+
+    return $app['twig']->render('??????.html.twig', array(??????????);
+    });
+
+
 
     return $app;
 ?>
