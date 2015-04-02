@@ -37,6 +37,7 @@
             {% endif %}
 
             <textarea rows="4" cols="50" name='message'>{{ message.getMessage }}</textarea>
+             <p><a href="/messages/{{ message.getMessageId }}/edit">Edit this Message</a></p> 
 
             {% endfor %}
 

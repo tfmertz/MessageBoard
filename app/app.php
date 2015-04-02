@@ -171,8 +171,45 @@
         $user = User::find($user_id);
         $messages = $user->getMessages();
         $tags = Tag::getAll();
-        return $app['twig']->render('messages.html.twig', array('user' => $user, 'all_tags' => $tags, 'messages' => $messages, 'users' => User::getAll()));
+        return $app['twig']->render('user_messages.html.twig', array('user' => $user, 'all_tags' => $tags, 'messages' => $messages, 'users' => User::getAll()));
     });
+
+
+
+
+
+    $app->get("/messages/{message_id}/edit", function($message_id) use ($app){
+        $message = Message::find($message_id);
+
+        return $app['twig']->render('message_edit.html.twig', array('message' => $message));
+
+    });
+
+    $app->patch("/messages/{message_id}", function($message_id) use ($app){
+        $update_message = $_POST['message'];
+        $message = Message::find($message_id);
+        $message->update($update_message);
+        return $app['twig']->render('message_edit.html.twig', array('message' => $message));
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return $app;
 ?>

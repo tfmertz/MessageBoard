@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>User messages</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+    <h1>Update the  message</h1>
+    <p>Old message: {{ message.getMessage }}</p>
+    <form action="/messages/{{ message.getMessageId }}" method="post">
+        <input name="_method" type="hidden" value="patch">
+
+        <label for="message">Edit your message:</label>
+        <textarea rows="3" class='textarea' name='message' >{{message.getMessage}} </textarea>
+
+
+        <button type="submit">Update</button>
+    </form>
+    <p><a href="/messages">Home</a></p>
+
+</div>
+
+    </body>
+</html>

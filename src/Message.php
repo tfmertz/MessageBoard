@@ -64,12 +64,17 @@
 
         function save()
         {
-            $statement1 = $GLOBALS['DB']->exec("CREATE FUNCTION delete_old_day() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN DELETE FROM messages WHERE created < NOW() - INTERVAL '2 days'; RETURN NEW; END; $$;");
-            $statement2 = $GLOBALS['DB']->exec("CREATE TRIGGER old_days AFTER INSERT ON messages EXECUTE PROCEDURE delete_old_day();");
+            // $statement1 = $GLOBALS['DB']->exec("CREATE FUNCTION delete_old_day() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN DELETE FROM messages WHERE created < NOW() - INTERVAL '2 days'; RETURN NEW; END; $$;");
+            // $statement2 = $GLOBALS['DB']->exec("CREATE TRIGGER old_days AFTER INSERT ON messages EXECUTE PROCEDURE delete_old_day();");
+            // $statement = $GLOBALS['DB']->query("INSERT INTO messages (message, created, user_id) VALUES ('{$this->getMessage()}', '{$this->getDate()}', {$this->getUserId()}) RETURNING id;");
+            // $result = $statement->fetch(PDO::FETCH_ASSOC);
+            // $this->setMessageId($result['id']);
+            // $statement3 = $GLOBALS['DB']->exec("DROP TRIGGER old_days ON messages;");
+
+            $statement1 = $GLOBALS['DB']->exec("DELETE FROM messages WHERE created < NOW() - INTERVAL '2 days';");
             $statement = $GLOBALS['DB']->query("INSERT INTO messages (message, created, user_id) VALUES ('{$this->getMessage()}', '{$this->getDate()}', {$this->getUserId()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setMessageId($result['id']);
-            $statement3 = $GLOBALS['DB']->exec("DROP TRIGGER old_days ON messages;");
 
         }
 
