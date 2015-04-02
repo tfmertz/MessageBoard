@@ -45,9 +45,10 @@
             $this->message = $new_message;
         }
 
-        function getDate()
-        {
+         function getDate()
+         {
             return $this->date->format('Y-m-d H:i:s');
+
         }
 
         function getTheDate()
@@ -60,11 +61,15 @@
              $this->date = $new_date;
         }
 
+
         function save()
         {
+            $statement1 = $GLOBALS['DB']->exec("CREATE FUNCTION delete_old_day() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN DELETE FROM messages WHERE created < NOW() - INTERVAL '2 days'; RETURN NEW; END; $$;");
+            $statement2 = $GLOBALS['DB']->exec("CREATE TRIGGER old_days AFTER INSERT ON messages EXECUTE PROCEDURE delete_old_day();");
             $statement = $GLOBALS['DB']->query("INSERT INTO messages (message, created, user_id) VALUES ('{$this->getMessage()}', '{$this->getDate()}', {$this->getUserId()}) RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setMessageId($result['id']);
+            $statement3 = $GLOBALS['DB']->exec("DROP TRIGGER old_days ON messages;");
 
         }
 
