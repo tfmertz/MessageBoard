@@ -30,21 +30,21 @@
                             {% endfor %}
                         </select>
 
-                        <button type="submit" class="btn btn-info" style="margin: 20px 0 0 15px">View posts</button>
+                        <button type="submit" class="btn btn-info btn_view_posts">View posts</button>
 
                     </form>
 
                     <hr size="1">
 
-                    <button class="btn btn-primary button_log_out">Log out</button>
+                    <a href="/logout" class='button_log_out'><button class="btn btn-primary">Log out</button></a>
 
                 </div>
 
             <div class="col-md-8 col-md-offset-4 newpost">
 
-                     <h3 style="text-align: right; background-color: rgb(153, 255, 235); color: white; padding-right: 40px">NEW POST</h3>
+                     <h3>NEW POST</h3>
 
-                    <form action="/add_message" method="post" style="padding: 0 10px 0 10px">
+                    <form action="/add_message" method="post">
 
                             <input type="hidden" name="user_id" value="{{ user.getId }}">
                             <label for="message">Select a tag :</label> <br>
@@ -53,16 +53,21 @@
                                 <option value="{{ tag.getId }}"> {{ tag.getName }} </option>
                               {% endfor %}
                             </select> <br>
-                            <label for="message" style="margin-top: 15px">Message :</label> <br>
-                            <textarea rows="4" cols="80" name='message'> </textarea>
-                            <button type="submit" class='btn btn-warning' style="float: right; margin: 25px 40px 10px 10px">Add Message</button>
+                            <label for="message" class='label_message'>Message :</label> <br>
+                            <textarea rows="4" class='textarea' name='message'> </textarea>
+
+                            <button type="submit" class='btn btn-warning btn_add_message'>Add Message</button>
                     </form>
 
                 </div>
 
             </div>
 
+
             <div class="col-md-8 col-md-offset-4">
+
+                <hr size="1">
+
 
                 {% if messages is not empty %}
 
@@ -75,14 +80,14 @@
 
                         {% for tag in message.getTags %}
 
-                            <h4 id="tag_name"> - {{ tag.getName() }}</h4>
+                            <h4 id="tag_name"> - {{ tag.getName() }} -</h4>
 
                         {% endfor %}
 
                     {% endif %}
 
 
-                    <textarea rows="4" cols="80" name='message' id="textarea_post">{{ message.getMessage }}</textarea>
+                    <textarea rows="4" cols="90" name='message' id="textarea_post" class='textarea' disabled>{{ message.getMessage }}</textarea>
 
                     <hr size="1">
 
