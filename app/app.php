@@ -89,15 +89,15 @@
 
     // route for messages>twig
 
-   //  $data_brands = Tag::getAll();
-   //  if($data_tags == []) {
-   //     $bar = new Tag("Bar");
-   //     $bar->save();
-   //     $meeting = new Tag("Meeting");
-   //     $meeting->save();
-   //     $hiking = new Tag("Hiking");
-   //  $hiking->save();
-   // }
+     $data_tags = Tag::getAll();
+     if($data_tags == []) {
+        $bar = new Tag("Bar");
+        $bar->save();
+        $meeting = new Tag("Meeting");
+        $meeting->save();
+        $hiking = new Tag("Hiking");
+        $hiking->save();
+    }
 
     $app->get("/messages", function(Request $request) use ($app) {
 

@@ -2,45 +2,61 @@
     <head>
         <title>Messages</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
     </head>
-    <body>
+    <body style="background-color: rgba(255, 255, 255, 0.5)">
         <div class='container'>
-            <h1>Welcome to Message Board</h1>
 
-            <form action="/add_message" method="post">
-                    <label for="message">New post :</label> <br>
-                    <select name='tag' type='text'>
-                      {% for tag in all_tags %}
-                        <option value="{{ tag.getId }}"> {{ tag.getName }} </option>
-                      {% endfor %}
+        <header style='margin: 0 -50px 0 -50px; padding: 20px; background-color: rgb(102, 255, 204); text-align: center; color: Snow; position: fixed; width: 100%; z-index: 1; text-shadow: -1px 1px 0 rgba(140,140,140,0.6) , 0px -1px 1px rgba(0,0,0,0.67); background-image: url(http://www.transparenttextures.com/patterns/gplay.png)'><h1 class="titre">Welcome to Message Board</h1></header>
+
+        <div class="row" style="margin-top: 125px">
+
+            <div class="col-md-3" style="background-color: rgb(102, 255, 204); height: 100%; padding-left: 35px; padding-right: 60px; position: fixed; z-index: 1; background-image: url(http://www.transparenttextures.com/patterns/fabric-of-squares.png)">
+
+                <h3 style="margin: 90px 0 20px 0; text-align: center; color: darkgrey">Search by Tags</h3>
+                {% for tag in all_tags %}
+                    <a href="/messages/{{ tag.getId }}"><li style="font-size: 20px">{{ tag.getName }}</li></a>
+                {% endfor %}
+
+                <hr size="1">
+
+                <form action="/user_messages" method="post">
+
+                    <h3 style="margin: 60px 0 20px 0; text-align: center; color: darkgrey">Search by Users</h3>
+
+                    <select name='user' type='text' style="width: 150px; font-size: 20px">
+                        {% for user in users %}
+                            <option value="{{ user.getId }}"> {{ user.getName }} </option>
+                        {% endfor %}
                     </select>
-                    <input type="hidden" name="user_id" value="{{ user.getId }}">
-                    <textarea rows="4" cols="50" name='message'> </textarea>
-                    <button type="submit">Add Message</button>
-            </form>
 
-            <hr size="1">
+                    <button type="submit" class="btn btn-info" style="margin: 20px 0 0 15px">View posts</button>
 
-            <h3>Tags</h3>
-            {% for tag in all_tags %}
-                <a href="/messages/{{ tag.getId }}"><h4>{{ tag.getName }}</h4></a>
-            {% endfor %}
+                </form>
 
-            <hr size="1">
+            </div>
 
-            <form action="/user_messages" method="post">
+            <div class="col-md-8 col-md-offset-4" style="border-width: 3px; border-style: dotted solid; border-color: rgb(153, 255, 235); padding: 0px; margin-top: 15px">
+                    
+                     <h3 style="text-align: right; background-color: rgb(153, 255, 235); color: white; padding-right: 40px">NEW POST</h3>
 
-                <h3>Users</h3>
+                <form action="/add_message" method="post" style="padding: 0 10px 0 10px">
+                     
+                        <input type="hidden" name="user_id" value="{{ user.getId }}">
+                        <label for="message">Select a tag :</label> <br>
+                        <select name='tag' type='text'>
+                          {% for tag in all_tags %}
+                            <option value="{{ tag.getId }}"> {{ tag.getName }} </option>
+                          {% endfor %}
+                        </select> <br>
+                        <label for="message" style="margin-top: 15px">Message :</label> <br>
+                        <textarea rows="4" cols="105" name='message'> </textarea>
+                        <button type="submit" class='btn btn-warning' style="float: right; margin: 10px 40px 10px 0">Add Message</button>
+                </form>
 
-                <select name='user' type='text'>
-                    {% for user in users %}
-                        <option value="{{ user.getId }}"> {{ user.getName }} </option>
-                    {% endfor %}
-                </select>
+            </div>
 
-                <button type="submit">View posts</button>
-
-            </form>
+        </div>
 
             <hr size="1">
 
