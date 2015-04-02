@@ -1,4 +1,24 @@
-.titre {
-	color: red;
+body {
+	background-color: GhostWhite;
 }
 
+#tag_name {
+	font-style: italic; 
+
+}
+
+#date {
+	float: right;
+	display: inline-block;
+	margin-right: 80px;
+}
+
+
+#textarea_post {
+	border: 3px double #CCCCCC;
+}
+
+#users_name {
+	color: rgb(255, 153, 51);
+
+}
