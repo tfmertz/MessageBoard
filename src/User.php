@@ -91,16 +91,13 @@
             $messages = [];
             foreach($returned_messages as $message)
             {
-                var_dump($message);
                 $text = $message['message'];
                 $date = $message['created'];
                 $user_id = $message['user_id'];
                 $id = $message['id'];
                 $new_message = new Message($text, $date, $user_id, $id);
-                var_dump($new_message);
                 array_push($messages, $new_message);
             }
-            var_dump($messages);
             return $messages;
         }
 
