@@ -139,6 +139,14 @@
             $GLOBALS['DB']->exec("DELETE FROM messages_tags WHERE message_id = {$this->getMessageId()};");
         }
 
+        function getUserName()
+        {
+            $user_id = $this->getUserId();
+            $user = User::find($user_id);
+            $user_name = $user->getName();
+            return $user_name;
+
+        }
 
 
 

@@ -117,13 +117,13 @@
 
 
     $app->post("/add_message", function() use ($app) {
-        $user_id = 3;
-        $user = User::find($user_id);
+        $user = User::find($_POST['user_id']);
+        var_dump($user);
         $message = $_POST['message'];
         $tag_id = $_POST['tag'];
         $tag = Tag::findById($tag_id);
         $date = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
-        $new_message = new Message($message, $date, $user_id);
+        $new_message = new Message($message, $date, $user->getId());
         $new_message->save();
         $new_message->addTag($tag);
         $tags = Tag::getAll();

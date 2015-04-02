@@ -14,7 +14,7 @@
                         <option value="{{ tag.getId }}"> {{ tag.getName }} </option>
                       {% endfor %}
                     </select>
-                    <input type="hidden" name="user_id" value="{ user.getId }">
+                    <input type="hidden" name="user_id" value="{{ user.getId }}">
                     <textarea rows="4" cols="50" name='message'> </textarea>
                     <button type="submit">Add Message</button>
             </form>
@@ -48,7 +48,7 @@
 
                 {% for message in messages %}
 
-                <h3>{{ user.getName }}</h3>
+                <h3>{{ message.getUserName }}</h3>
                 <p>{{ message.getTheDate }}</p>
 
                 {% if message.getTags is not empty %}
