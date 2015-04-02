@@ -18,8 +18,21 @@
     use Symfony\Component\HttpKernel\HttpKernelInterface;
     Request::enableHttpMethodParameterOverride();
 
+    session_start();
 
-    //Route to home page
+    // POPULATE THE TAGS DATABASE
+     $data_tags = Tag::getAll();
+
+    if($data_tags == []) {
+        $bar = new Tag("Bar");
+        $bar->save();
+        $meeting = new Tag("Meeting");
+        $meeting->save();
+        $hiking = new Tag("Hiking");
+        $hiking->save();
+    }
+
+//********HOMEPAGE****************HOMEPAGE****************HOMEPAGE***********
     $app->get("/", function(Request $request) use ($app) {
         $error = "false";
 
@@ -32,14 +45,47 @@
         return $app['twig']->render('index.twig', array('error' => $error));
     });
 
+//********LOGIN****************LOGIN****************LOGIN***********
+
+    $app->post("/", function() use ($app) {
+
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        //check if login is valid, if so return a user, if not null
+        $user = User::logInCheck($username, $password);
+        if($user) {
+            //if we have a user store it into the session by id
+            $_SESSION['user_id'] = $user->getId();
+
+            return $app->redirect('/messages');
+        } else {
+            $error = "true";
+            $subRequest = Request::create('/', 'GET', array('error' => $error));
+
+            return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST, true);
+        }
+    });
+
+//********LOGOUT****************LOGOUT****************LOGOUT***********
+
+    $app->get("/logout", function() use ($app) {
+
+        session_unset();
+
+        return $app->redirect('/');
+    });
+//end logout
+
 
 //****SIGN UP********SIGN UP********SIGN UP********SIGN UP****
 
+    //get
     $app->get('/sign_up', function() use ($app) {
 
         return $app['twig']->render('sign_up.twig', array('error' => ""));
     });
 
+    //post
     $app->post("/sign_up", function() use ($app) {
         $error = "";
 
@@ -51,6 +97,8 @@
                 $password= $_POST['password'];
                 $new_user = new User($user_name, $password);
                 $new_user->save();
+                //store user id into the session
+                $_SESSION['user_id'] = $new_user->getId();
             }
             else
             {
@@ -62,51 +110,24 @@
             $error = "Usernames must be ONE word.";
         }
 
-
-        return $app['twig']->render('sign_up.twig', array('error' => $error));
-    });
-
-//********LOGIN****************LOGIN****************LOGIN***********
-
-    $app->post("/", function() use ($app) {
-
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $user = User::logInCheck($username, $password);
-        if($user) {
-            $subRequest = Request::create('/messages', 'GET', array('user' => $user));
-
-            return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
-        } else {
-            $error = "true";
-            $subRequest = Request::create('/', 'GET', array('error' => $error));
-
-            return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST, true);
+        if($error) {
+            return $app['twig']->render('sign_up.twig', array('error' => $error));
+        }
+        else {
+            return $app->redirect('/messages');
         }
 
-        return $app['twig']->render('login.html.twig', array());
     });
+//end signup
 
-    // route for messages>twig
 
-     $data_tags = Tag::getAll();
-     if($data_tags == []) {
-        $bar = new Tag("Bar");
-        $bar->save();
-        $meeting = new Tag("Meeting");
-        $meeting->save();
-        $hiking = new Tag("Hiking");
-        $hiking->save();
-    }
+//********MESSAGES****************MESSAGES****************MESSAGES***********
+    $app->get("/messages", function() use ($app) {
 
-    $app->get("/messages", function(Request $request) use ($app) {
+        $user = User::find($_SESSION['user_id']);
 
-        $query = $request->query->all();
-
-        if(empty($query)) {
+        if($user == null) {
             return $app->redirect('/');
-        } else {
-            $user = $query['user'];
         }
 
         $tags = Tag::getAll();
@@ -134,6 +155,7 @@
 
 
     $app->get("/messages/{tag_id}", function($tag_id) use ($app) {
+        $user = null; 
         $tag = Tag::findById($tag_id);
         $messages = $tag->getMessages();
         $tags = Tag::getAll();

@@ -7,9 +7,15 @@
     <body style="background-color: rgba(255, 255, 255, 0.5)">
         <div class='container'>
 
+
+
         <header style='margin: 0 -50px 0 -50px; padding: 20px; background-color: rgb(102, 255, 204); text-align: center; color: Snow; position: fixed; width: 100%; z-index: 1; text-shadow: -1px 1px 0 rgba(140,140,140,0.6) , 0px -1px 1px rgba(0,0,0,0.67); background-image: url(http://www.transparenttextures.com/patterns/gplay.png)'><h1 class="titre">Welcome to Message Board</h1></header>
 
         <div class="row" style="margin-top: 125px">
+
+            <p>
+                <a href="/logout">Logout</a>
+            </p>
 
             <div class="col-md-3" style="background-color: rgb(102, 255, 204); height: 100%; padding-left: 35px; padding-right: 60px; position: fixed; z-index: 1; background-image: url(http://www.transparenttextures.com/patterns/fabric-of-squares.png)">
 
@@ -37,11 +43,11 @@
             </div>
 
             <div class="col-md-8 col-md-offset-4" style="border-width: 3px; border-style: dotted solid; border-color: rgb(153, 255, 235); padding: 0px; margin-top: 15px">
-                    
+
                      <h3 style="text-align: right; background-color: rgb(153, 255, 235); color: white; padding-right: 40px">NEW POST</h3>
 
                 <form action="/add_message" method="post" style="padding: 0 10px 0 10px">
-                     
+
                         <input type="hidden" name="user_id" value="{{ user.getId }}">
                         <label for="message">Select a tag :</label> <br>
                         <select name='tag' type='text'>
