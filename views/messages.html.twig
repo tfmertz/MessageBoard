@@ -38,7 +38,9 @@
 
                     <a href="/logout" class='button_log_out'><button class="btn btn-primary">Log out</button></a>
 
+
                 </div>
+
 
             <div class="col-md-8 col-md-offset-4 newpost">
 
@@ -93,6 +95,10 @@
 
                     {% endfor %}
 
+
+                {% else %}
+
+                    <h3>No Messages were found for {{ user.getName() }}.</h3>
 
                 {% endif %}
 
