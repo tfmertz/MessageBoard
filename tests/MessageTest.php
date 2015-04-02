@@ -16,15 +16,15 @@
             Tag::deleteAll();
         }
 
-        function test_save_time()
-        {
-
-        }
-
-        function test_save_now()
-        {
-
-        }
+        // function test_save_time()
+        // {
+        //
+        // }
+        //
+        // function test_save_now()
+        // {
+        //
+        // }
 
         function testGetMessage()
         {
@@ -63,7 +63,7 @@
             $test_message = new Message($message,$date,$user_id);
 
             //Act
-            $result = $test_message->getDate();
+            $result = $test_message->getTheDate();
 
             //Assert
             $this->assertEquals($date, $result);
@@ -78,7 +78,7 @@
             $test_message = new Message($message,$date,$user_id);
             //Act
             $test_message->setDate("2014-11-13 12:45:34");
-            $result = $test_message->getDate();
+            $result = $test_message->getTheDate();
             //Assert
             $this->assertEquals("2014-11-13 12:45:34", $result);
         }
@@ -121,13 +121,13 @@
         {
             //Arrange
             $message = "Going to movie tomorrow";
-            $date = "2014-11-11 12:45:34";
+            $date = "2015-04-11 12:45:34";
             $user_id = 3;
             $test_message = new Message($message,$date,$user_id);
             $test_message->save();
 
             $message2 = "Going to movie tomorrow";
-            $date2 = "2014-11-10 12:45:34";
+            $date2 = "2015-04-10 12:45:34";
             $user_id = 3;
             $test_message2 = new Message($message2,$date2,$user_id);
             $test_message2->save();
@@ -143,7 +143,7 @@
         {
             //Arrange
             $message = "Going to movie tomorrow";
-            $date = "2014-11-11 12:45:34";
+            $date = "2015-04-11 12:45:34";
             $user_id = 3;
             $test_message = new Message($message,$date,$user_id);
             $test_message->save();
@@ -160,13 +160,13 @@
         {
             //Arrange
             $message = "Going to movie tomorrow";
-            $date = "2014-11-11 12:45:34";
+            $date = "2015-11-11 12:45:34";
             $user_id = 3;
             $test_message = new Message($message,$date,$user_id);
             $test_message->save();
 
             $message2 = "Going to movie tomorrow";
-            $date2 = "2014-11-10 12:45:34";
+            $date2 = "2015-11-10 12:45:34";
             $user_id = 3;
             $test_message2 = new Message($message2,$date2,$user_id);
             $test_message2->save();
@@ -183,13 +183,13 @@
         {
             //Arrange
             $message = "Going to movie tomorrow";
-            $date = "2014-11-11 12:45:34";
+            $date = "2015-11-11 12:45:34";
             $user_id = 3;
             $test_message = new Message($message,$date,$user_id);
             $test_message->save();
 
             $message2 = "Going to movie tomorrow";
-            $date2 = "2014-11-10 12:45:34";
+            $date2 = "2015-11-10 12:45:34";
             $user_id = 3;
             $test_message2 = new Message($message2,$date2,$user_id);
             $test_message2->save();
@@ -206,7 +206,7 @@
         {
             //Arrange
             $message = "Going to movie tomorrow";
-            $date = "2014-11-11 12:45:34";
+            $date = "2015-11-11 12:45:34";
             $user_id = 3;
             $test_message = new Message($message,$date,$user_id);
             //Act
@@ -220,7 +220,7 @@
         {
             //Arrange
             $message = "Going to movie tomorrow";
-            $date = "2014-11-11 12:45:34";
+            $date = "2015-11-11 12:45:34";
             $user_id = 3;
             $test_message = new Message($message,$date,$user_id);
             $test_message->save();
@@ -236,31 +236,62 @@
             $this->assertEquals([$test_tag], $result);
         }
 
-        function testGetTags()
+        // function testGetTags()
+        // {
+        //     //Arrange
+        //     $message = "Going to movie tomorrow";
+        //     $date = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+        //     //$today = $date->getDate();
+        //     //var_dump($date);
+        //     //var_dump($today);
+        //     $user_id = 3;
+        //     $test_message = new Message($message, $date,$user_id);
+        //     $test_message->save();
+        //
+        //     $tag_name = "Entertainment";
+        //     $test_tag = new Tag($tag_name);
+        //     $test_tag->save();
+        //
+        //     $tag_name2 = "Having fun";
+        //     $test_tag2 = new Tag($tag_name2);
+        //     $test_tag2->save();
+        //     //Act
+        //     $test_message->addTag($test_tag);
+        //     $test_message->addTag($test_tag2);
+        //
+        //     //Assert
+        //     $result = $test_message->getTags();
+        //     $this->assertEquals([$test_tag, $test_tag2], $result);
+        // }
+
+        function testDeleteOldDay()
         {
             //Arrange
             $message = "Going to movie tomorrow";
-            $date = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+            $date = "2014-11-11 12:45:34";
             $user_id = 3;
             $test_message = new Message($message,$date,$user_id);
             $test_message->save();
 
-            $tag_name = "Entertainment";
-            $test_tag = new Tag($tag_name);
-            $test_tag->save();
+            $message2 = "Going to the Portland Museum";
+            $date2 = "2015-03-11 12:45:34";
+            $user_id2 = 2;
+            $test_message2 = new Message($message2,$date2,$user_id2);
+            $test_message2->save();
 
-            $tag_name2 = "Having fun";
-            $test_tag2 = new Tag($tag_name2);
-            $test_tag2->save();
+            $message3 = "Going to the Pub";
+            $date3 = "2015-04-20 12:45:34";
+            $user_id3 = 1;
+            $test_message3 = new Message($message3,$date3,$user_id3);
+            $test_message3->save();
+
             //Act
-            $test_message->addTag($test_tag);
-            $test_message->addTag($test_tag2);
+
 
             //Assert
-            $result = $test_message->getTags();
-            $this->assertEquals([$test_tag, $test_tag2], $result);
+            $result= Message::getAll();
+            $this->assertEquals([$test_message3], $result);
+
         }
-
-
 
     }
