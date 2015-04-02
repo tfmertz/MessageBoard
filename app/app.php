@@ -26,8 +26,10 @@
     if($data_tags == []) {
         $bar = new Tag("Bar");
         $bar->save();
-        $meeting = new Tag("Meeting");
-        $meeting->save();
+        $meet_up = new Tag("Meet up");
+        $meet_up->save();
+        $work_meeting = new Tag("Work meeting");
+        $work_meeting->save();
         $hiking = new Tag("Hiking");
         $hiking->save();
     }
