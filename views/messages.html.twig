@@ -6,7 +6,7 @@
     </head>
     <body>
 
-        <header><h1 class="titre">Welcome to Message Board</h1></header>
+        <header><h1>Welcome to Message Board</h1></header>
 
 
         <div class="row">
@@ -15,7 +15,7 @@
 
                 <h3>Search by Tags</h3>
                 {% for tag in all_tags %}
-                    <a href="/messages/{{ tag.getId }}"><li>{{ tag.getName }}</li></a>
+                    <a href="/messages/{{ tag.getId }}"><li class="glyphicon glyphicon-tags"> {{ tag.getName }}</li></a> <br>
                 {% endfor %}
 
                 <hr size="1">
@@ -36,7 +36,7 @@
 
                     <hr size="1">
 
-                    <a href="/logout" class='button_log_out'><button class="btn btn-primary">Log out</button></a>
+                    <a href="/logout" class='button'><button class="btn btn-primary">Log out</button></a>
 
 
                 </div>
@@ -89,7 +89,7 @@
                     {% endif %}
 
 
-                    <textarea rows="4" cols="90" name='message' id="textarea_post" class='textarea' disabled>{{ message.getMessage }}</textarea>
+                    <textarea rows="3" name='message' id="textarea_post" class='textarea' disabled>{{ message.getMessage }}</textarea>
 
                     <hr size="1">
 

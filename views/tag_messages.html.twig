@@ -2,43 +2,53 @@
     <head>
         <title>Tags</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
     </head>
     <body>
 
-        <div class='container'>
+        <header><h1>Welcome to Message Board</h1></header>
 
-            <h3>Tags</h3>
-            {% for tag in tags %}
-                <a href="/messages/{{ tag.getId }}"><h4>{{ tag.getName }}</h4></a>
-            {% endfor %}
+        <div class="row">
 
-            <a href="/messages">Home</a>
+            <div class="col-md-3 searchby">
 
-            <hr size="1">
+                <h3>Search by Tags</h3>
+                {% for tag in tags %}
+                <a href="/messages/{{ tag.getId }}"><li class="glyphicon glyphicon-tags"> {{ tag.getName }}</li></a> <br>
+                {% endfor %}
 
-            <h2>{{ tag.getName }}</h2>
+                <hr size="1">
 
-        {% if messages is not empty %}
+                <a href="/messages" class='button'><button class="btn btn-info">Home</button></a>
 
-            {% for message in messages %}
+            </div>
+
+        </div>
+
+        <div class="col-md-8 col-md-offset-4">
+
+            <p class='tag_name'>{{ tag.getName }}</p>
+
+            {% if messages is not empty %}
+
+                {% for message in messages %}
 
 
-                            <h3>{{ user.getName }}</h3>
-                            <p>{{ message.getTheDate }}</p>
+                                <p class='tag_user_name'>{{ user.getName }}</p>
+                                <p class='tag_date'> - {{ message.getTheDate }}</p>
+                                <textarea rows="3" class='bg-info tag_textarea' disabled>{{ message.getMessage }}</textarea>
 
-                            <div class="bg-info">
-                                <p>{{ message.getMessage }}</p>
-                            </div>
+                                <hr size="1">
 
-            {% endfor %}
+                {% endfor %}
 
-            {% else %}
+                {% else %}
 
-            <h4>No message for that tag.</h4>
+                <h4>No message for that tag.</h4>
 
-        {% endif %}
+            {% endif %}
 
-    </div>
+        </div>
 
     </body>
 </html>
