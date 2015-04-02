@@ -143,7 +143,8 @@
         $tag_id = $app->escape($_POST['tag']);
         $tag = Tag::findById($tag_id);
         $date = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
-        $new_message = new Message($app->escape($message), $date, $user->getId());
+
+        $new_message = new Message($message, $date, $user->getId());
         $new_message->save();
         $new_message->addTag($tag);
 
@@ -164,11 +165,14 @@
 
 
     $app->post("/user_messages", function() use ($app) {
+
+        $user = User::find($_SESSION['user_id']);
+
         $user_id = $_POST['user'];
-        $user = User::find($user_id);
-        $messages = $user->getMessages();
+        $user_message = User::find($user_id);
+        $messages = $user_message->getMessages();
         $tags = Tag::getAll();
-        return $app['twig']->render('messages.html.twig', array('user' => $user, 'all_tags' => $tags, 'messages' => $messages, 'users' => User::getAll()));
+        return $app['twig']->render('messages.html.twig', array('user' => $user, 'message_user' => $user_message, 'all_tags' => $tags, 'messages' => $messages, 'users' => User::getAll()));
     });
 
     return $app;
