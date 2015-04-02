@@ -63,6 +63,7 @@
 
         function save()
         {
+
             $GLOBALS['DB']->exec("DELETE FROM messages WHERE created < NOW() - INTERVAL '2 days'; ");
             $statement = $GLOBALS['DB']->prepare("INSERT INTO messages (message, created, user_id) VALUES (:message, '{$this->getDate()}', {$this->getUserId()}) RETURNING id;");
             $statement->bindParam(':message', $this->getMessage());
@@ -70,7 +71,6 @@
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setMessageId($result['id']);
-
 
         }
 
