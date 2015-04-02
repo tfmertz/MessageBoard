@@ -2,35 +2,51 @@
 <html>
     <head>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/main.css" media="screen" title="no title" charset="utf-8">
 
         <title>Sign up</title>
     </head>
     <body>
-        <form action='/sign_up' method='post'>
-          <fieldset>
-            <legend>Sign Up</legend><br>
 
-            <label for='username' >User Name:</label>
-            <input type='text' name='username' id='username' minlength = "6" maxlength="50" placeholder = "at least 6 characters" />
-            <span class = "text-danger">
-                {{ error }}
-            </span>
+        <header><h1><span class="glyphicon glyphicon-send"></span>MessageBoard</h1></header>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-12 col-sm-offset-4">
+                    <h2>Sign Up</h2>
+
+                    <br>
+
+                    <form action='/sign_up' method='post'>
+                        <div class="form-group">
+                            <label for='username' >User Name:</label>
+                            <input type='text' name='username' id='username' minlength = "6" maxlength="50" placeholder = "at least 6 characters" />
+                            <span class = "text-danger">
+                                {{ error }}
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for='password' >Password:</label>
+                            <input type='password' name='password' id='password' minlength = "6" nmaxlength="50" placeholder= "at least 8 characters"/>
+                        </div>
+
+                        <button class="btn btn-success" type="submit">Register</button>
+                    </form>
+
+                    <br>
+
+                    <a class="btn btn-default" href="/">Return to Login</a>
+
+                </div>
 
 
-            <br><br>
-
-            <label for='password' >Password:</label>
-            <input type='password' name='password' id='password' minlength = "6" nmaxlength="50" placeholder= "at least 8 characters"/><br><br>
-            <input type='submit' name='Submit' value='Submit' />
+            </div>
 
 
-
-          </fieldset>
-        </form>
-
-        <br>
-
-        <a class="btn btn-default" href="/">Return to Login</a>
+        </div>
 
 
     </body>

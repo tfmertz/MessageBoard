@@ -2,7 +2,6 @@ body {
 	background-color: GhostWhite;
 }
 
-
 	 header{
 		padding: 20px;
 		background-color: rgb(102, 255, 204);
@@ -14,7 +13,10 @@ body {
 		text-shadow: -1px 1px 0 rgba(140,140,140,0.6) , 0px -1px 1px rgba(0,0,0,0.67);
 		background-image: url(http://www.transparenttextures.com/patterns/gplay.png);
 		top: 0;
+	
 	}
+
+	/********************************************  MESSAGES.HTML.TWIG  *******************************************************/
 
 	.row {
 		margin-top: 125px;
@@ -35,10 +37,13 @@ body {
 	.searchby h3 {
 		margin: 90px 0 20px 0;
 		 text-align: center;
-		 color: darkgrey;
-	}
-	 .searchby li{
+		 color: rgb(102, 102, 102);
+		text-shadow: -1px 1px 0 rgba(140,140,140,0.6) , 0px -1px 1px rgba(255,255,255,0.67);
 
+	}
+
+	 .searchby li{
+		font-size: 20px;
 	}
 
 	.select {
@@ -60,6 +65,8 @@ body {
 		background-color: rgb(153, 255, 235);
 		color: white;
 		padding-right: 40px;
+		text-shadow: -1px 1px 0 rgba(140,140,140,0.6) , 0px -1px 1px rgba(0,0,0,0.67);
+
 	}
 
 	.newpost form {
@@ -107,7 +114,44 @@ body {
 	width: 70%;
 }
 
-a.button_log_out {
+a.button {
 	text-align: center;
 	display: block;
+	margin-top: 50px;
+}
+
+/********************************************  TAG_MESSAGES.HTML.TWIG  *******************************************************/
+
+
+.tag_name {
+	text-align: center;
+	background-color: rgb(148, 219, 255);
+	color: white;
+	margin: 0px 0px 17px 0;
+	text-shadow: -1px 1px 0 rgba(140,140,140,0.6) , 0px -1px 1px rgba(0,0,0,0.67);
+	font-size: 30px;
+}
+
+p.tag_user_name {
+	color: rgb(255, 153, 51);
+	float: left;
+	display: inline-block;
+	margin-right: 15px;
+	font-size: 30px;
+
+	}
+
+.tag_date {
+	margin-top: 33px;
+
+}
+
+.tag_textarea {
+	width: 100%;
+	margin-top: -5px;
+}
+
+.glyphicon {
+	padding: 8px;
+
 }
