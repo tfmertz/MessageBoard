@@ -118,7 +118,6 @@
 
     $app->post("/add_message", function() use ($app) {
         $user = User::find($_POST['user_id']);
-        var_dump($user);
         $message = $_POST['message'];
         $tag_id = $_POST['tag'];
         $tag = Tag::findById($tag_id);
