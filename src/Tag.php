@@ -42,7 +42,7 @@ class Tag
 
       static function getAll()
        {
-         $return_tags =  $GLOBALS['DB']->query("SELECT * FROM tags");
+         $return_tags =  $GLOBALS['DB']->query("SELECT * FROM tags;");
          $tag_array = array();
          foreach($return_tags as $tag)
          {
@@ -73,7 +73,7 @@ class Tag
            $statement = $GLOBALS['DB']->query("SELECT messages.* FROM tags
            JOIN messages_tags ON (tags.id = messages_tags.tag_id)
            JOIN messages ON (messages.id = messages_tags.message_id)
-           WHERE tags.id = {$this->getId()};");
+           WHERE tags.id = {$this->getId()} ORDER BY created DESC;");
            $tags_message = $statement->fetchAll(PDO::FETCH_ASSOC);
            $message_array = array();
            foreach ($tags_message as $message)

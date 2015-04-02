@@ -52,7 +52,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         //check if login is valid, if so return a user, if not null
-        $user = User::logInCheck($username, $password);
+        $user = User::logInCheck($app->escape($username), $app->escape($password));
         if($user) {
             //if we have a user store it into the session by id
             $_SESSION['user_id'] = $user->getId();
@@ -95,7 +95,7 @@
             if (User::checkAvailable($user_name))
             {
                 $password= $_POST['password'];
-                $new_user = new User($user_name, $password);
+                $new_user = new User($app->escape($user_name), $app->escape($password));
                 $new_user->save();
                 //store user id into the session
                 $_SESSION['user_id'] = $new_user->getId();
@@ -140,10 +140,10 @@
     $app->post("/add_message", function() use ($app) {
         $user = User::find($_POST['user_id']);
         $message = $_POST['message'];
-        $tag_id = $_POST['tag'];
+        $tag_id = $app->escape($_POST['tag']);
         $tag = Tag::findById($tag_id);
         $date = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
-        $new_message = new Message($message, $date, $user->getId());
+        $new_message = new Message($app->escape($message), $date, $user->getId());
         $new_message->save();
         $new_message->addTag($tag);
 
