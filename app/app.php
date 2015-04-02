@@ -154,14 +154,11 @@
 
 
     $app->get("/messages/{tag_id}", function($tag_id) use ($app) {
-        $user = null;
+        $user = User::find($_SESSION['user_id']);
         $tag = Tag::findById($tag_id);
         $messages = $tag->getMessages();
         $tags = Tag::getAll();
-        foreach ($messages as $message) {
-            $user_id = $message->getUserId();
-            $user = User::find($user_id);
-        }
+
         return $app['twig']->render('tag_messages.html.twig', array('tag' => $tag, 'user' => $user, 'tags' => $tags, 'messages' => $messages));
     });
 

@@ -13,13 +13,16 @@ body {
 		text-shadow: -1px 1px 0 rgba(140,140,140,0.6) , 0px -1px 1px rgba(0,0,0,0.67);
 		background-image: url(http://www.transparenttextures.com/patterns/gplay.png);
 		top: 0;
-	
+		margin-bottom: 20px;
 	}
+
 
 	/********************************************  MESSAGES.HTML.TWIG  *******************************************************/
 
+
+
 	.row {
-		margin-top: 125px;
+		margin-top: 150px;
 	}
 
 	.searchby {
@@ -35,7 +38,7 @@ body {
 	}
 
 	.searchby h3 {
-		margin: 90px 0 20px 0;
+		margin: 50px 0 20px 0;
 		 text-align: center;
 		 color: rgb(102, 102, 102);
 		text-shadow: -1px 1px 0 rgba(140,140,140,0.6) , 0px -1px 1px rgba(255,255,255,0.67);
@@ -79,7 +82,9 @@ body {
 	}
 
 .btn_view_posts {
-	margin: 20px 0 0 15px;
+	margin: 20px 0 0 0px;
+	display: inline-block;
+	float: left;
 }
 
 .label_message {
@@ -120,6 +125,11 @@ a.button {
 	margin-top: 50px;
 }
 
+.btn-view-all {
+	margin: 6px 0 0 15px;
+
+}
+
 /********************************************  TAG_MESSAGES.HTML.TWIG  *******************************************************/
 
 
@@ -153,5 +163,10 @@ p.tag_user_name {
 
 .glyphicon {
 	padding: 8px;
+
+}
+
+h3.hello {
+	margin: 25px 0 5px 0;
 
 }
