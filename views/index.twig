@@ -3,16 +3,18 @@
 <html>
     <head>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/main.css" media="screen" title="no title" charset="utf-8">
         <title>Message Board</title>
     </head>
     <body>
+
+        <header><h1><span class="glyphicon glyphicon-send"></span>MessageBoard</h1></header>
+
         <div class="container">
             <div class="row">
 
                 <div class="col-md-12">
                     <div class="text-center">
-
-                    <h1>Welcome to the Message Board</h1>
 
 
                     {% if error == "true" %}
@@ -23,7 +25,8 @@
 
                     {% endif %}
 
-                    <h5>Login if you are a member:</h5>
+                    <h2>Login</h2>
+                    <br>
 
                     <form action="/" method="post">
                         <p>
@@ -37,6 +40,9 @@
                         </p>
                         <button class="btn btn-primary" type="submit">Log in</button>
                     </form>
+                    <br><br>
+
+                    <h3>Not a member?</h3>
                     <br>
 
                     <a class="btn btn-default" href="/sign_up">Sign up!</a>

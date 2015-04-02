@@ -52,7 +52,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         //check if login is valid, if so return a user, if not null
-        $user = User::logInCheck($username, $password);
+        $user = User::logInCheck($app->escape($username), $app->escape($password));
         if($user) {
             //if we have a user store it into the session by id
             $_SESSION['user_id'] = $user->getId();
@@ -95,7 +95,7 @@
             if (User::checkAvailable($user_name))
             {
                 $password= $_POST['password'];
-                $new_user = new User($user_name, $password);
+                $new_user = new User($app->escape($user_name), $app->escape($password));
                 $new_user->save();
                 //store user id into the session
                 $_SESSION['user_id'] = $new_user->getId();
@@ -140,9 +140,10 @@
     $app->post("/add_message", function() use ($app) {
         $user = User::find($_POST['user_id']);
         $message = $_POST['message'];
-        $tag_id = $_POST['tag'];
+        $tag_id = $app->escape($_POST['tag']);
         $tag = Tag::findById($tag_id);
         $date = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+
         $new_message = new Message($message, $date, $user->getId());
         $new_message->save();
         $new_message->addTag($tag);
@@ -154,24 +155,25 @@
 
 
     $app->get("/messages/{tag_id}", function($tag_id) use ($app) {
-        $user = null;
+        $user = User::find($_SESSION['user_id']);
         $tag = Tag::findById($tag_id);
         $messages = $tag->getMessages();
         $tags = Tag::getAll();
-        foreach ($messages as $message) {
-            $user_id = $message->getUserId();
-            $user = User::find($user_id);
-        }
+
         return $app['twig']->render('tag_messages.html.twig', array('tag' => $tag, 'user' => $user, 'tags' => $tags, 'messages' => $messages));
     });
 
 
     $app->post("/user_messages", function() use ($app) {
+
+        $user = User::find($_SESSION['user_id']);
+
         $user_id = $_POST['user'];
-        $user = User::find($user_id);
-        $messages = $user->getMessages();
+        $user_message = User::find($user_id);
+        $messages = $user_message->getMessages();
         $tags = Tag::getAll();
-        return $app['twig']->render('user_messages.html.twig', array('user' => $user, 'all_tags' => $tags, 'messages' => $messages, 'users' => User::getAll()));
+
+        return $app['twig']->render('messages.html.twig', array('user' => $user, 'message_user' => $user_message, 'all_tags' => $tags, 'messages' => $messages, 'users' => User::getAll()));
     });
 
 
