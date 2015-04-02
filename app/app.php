@@ -89,15 +89,15 @@
 
     // route for messages>twig
 
-   //  $data_brands = Tag::getAll();
-   //  if($data_tags == []) {
-   //     $bar = new Tag("Bar");
-   //     $bar->save();
-   //     $meeting = new Tag("Meeting");
-   //     $meeting->save();
-   //     $hiking = new Tag("Hiking");
-   //  $hiking->save();
-   // }
+     $data_tags = Tag::getAll();
+     if($data_tags == []) {
+        $bar = new Tag("Bar");
+        $bar->save();
+        $meeting = new Tag("Meeting");
+        $meeting->save();
+        $hiking = new Tag("Hiking");
+        $hiking->save();
+    }
 
     $app->get("/messages", function(Request $request) use ($app) {
 
@@ -118,7 +118,6 @@
 
     $app->post("/add_message", function() use ($app) {
         $user = User::find($_POST['user_id']);
-        var_dump($user);
         $message = $_POST['message'];
         $tag_id = $_POST['tag'];
         $tag = Tag::findById($tag_id);
