@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>Tags</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    </head>
+    <body>
+
+        <div class='container'>
+
+            <h3>Tags</h3>
+            {% for tag in tags %}
+                <a href="/messages/{{ tag.getId }}"><h4>{{ tag.getName }}</h4></a>
+            {% endfor %}
+
+            <a href="/messages">Home</a>
+
+            <hr size="1">
+
+            <h2>{{ tag.getName }}</h2>
+
+        {% if messages is not empty %}
+
+            {% for message in messages %}
+
+
+                            <h3>{{ user.getName }}</h3>
+                            <p>{{ message.getTheDate }}</p>
+
+                            <textarea rows="4" cols="50" name='message'>{{ message.getMessage }}</textarea>
+
+            {% endfor %}
+
+            {% else %}
+
+            <h4>No message for that tag.</h4>
+
+        {% endif %}
+
+    </div>
+
+    </body>
+</html>

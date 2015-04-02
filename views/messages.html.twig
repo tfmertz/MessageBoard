@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Messages</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class='container'>
+            <h1>Welcome to Message Board</h1>
+
+            <form action="/add_message" method="post">
+                    <label for="message">New post :</label> <br>
+                    <select name='tag' type='text'>
+                      {% for tag in all_tags %}
+                        <option value="{{ tag.getId }}"> {{ tag.getName }} </option>
+                      {% endfor %}
+                    </select>
+                    <input type="hidden" name="user_id" value="{{ user.getId }}">
+                    <textarea rows="4" cols="50" name='message'> </textarea>
+                    <button type="submit">Add Message</button>
+            </form>
+
+            <hr size="1">
+
+            <h3>Tags</h3>
+            {% for tag in all_tags %}
+                <a href="/messages/{{ tag.getId }}"><h4>{{ tag.getName }}</h4></a>
+            {% endfor %}
+
+            <hr size="1">
+
+            <form action="/user_messages" method="post">
+
+                <h3>Users</h3>
+
+                <select name='user' type='text'>
+                    {% for user in users %}
+                        <option value="{{ user.getId }}"> {{ user.getName }} </option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit">View posts</button>
+
+            </form>
+
+            <hr size="1">
+
+            {% if messages is not empty %}
+
+                {% for message in messages %}
+
+                <h3>{{ message.getUserName }}</h3>
+                <p>{{ message.getTheDate }}</p>
+
+                {% if message.getTags is not empty %}
+
+                    {% for tag in message.getTags %}
+
+                        <p>
+                            {{ tag.getName() }}
+                        </p>
+                    {% endfor %}
+
+                {% endif %}
+
+                <textarea rows="4" cols="50" name='message'>{{ message.getMessage }}</textarea>
+
+                {% endfor %}
+
+
+            {% endif %}
+
+        </div>
+    </body>
+</html>
