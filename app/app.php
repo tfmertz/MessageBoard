@@ -130,16 +130,15 @@
             return $app->redirect('/');
         }
 
-        $tags = Tag::getAll();
-        return $app['twig']->render('messages.html.twig', array('tags' => $tags, 'user' => $user,
-        'messages' => Message::getAll(), 'all_tags' => Tag::getAll(), 'users'=>User::getAll()));
+
+        return $app['twig']->render('messages.html.twig', array('user' => $user, 'users'=>User::getAll(),
+        'messages' => Message::getAll(), 'all_tags' => Tag::getAll()));
 
     });
 
 
     $app->post("/add_message", function() use ($app) {
         $user = User::find($_POST['user_id']);
-        var_dump($user);
         $message = $_POST['message'];
         $tag_id = $_POST['tag'];
         $tag = Tag::findById($tag_id);
@@ -147,10 +146,10 @@
         $new_message = new Message($message, $date, $user->getId());
         $new_message->save();
         $new_message->addTag($tag);
-        $tags = Tag::getAll();
 
 
-        return $app['twig']->render('messages.html.twig', array('users' => User::getAll(), 'user' => $user, 'messages' => Message::getAll(), 'all_tags' => Tag::getAll()));
+        return $app->redirect('/messages');
+
     });
 
 
