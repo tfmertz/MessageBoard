@@ -155,7 +155,7 @@
 
 
     $app->get("/messages/{tag_id}", function($tag_id) use ($app) {
-        $user = null; 
+        $user = null;
         $tag = Tag::findById($tag_id);
         $messages = $tag->getMessages();
         $tags = Tag::getAll();
@@ -167,10 +167,13 @@
     });
 
 
-    // $app->post("/user_messages", function() use ($app) {
-    //     $user_id = $_POST['user'];
-    //     return $app['twig']->render('tag_messages.html.twig', array('tag' => $tag, 'user' => $user, 'tags' => $tags, 'messages' => $messages));
-    // });
+    $app->post("/user_messages", function() use ($app) {
+        $user_id = $_POST['user'];
+        $user = User::find($user_id);
+        $messages = $user->getMessages();
+        $tags = Tag::getAll();
+        return $app['twig']->render('messages.html.twig', array('user' => $user, 'all_tags' => $tags, 'messages' => $messages, 'users' => User::getAll()));
+    });
 
     return $app;
 ?>
