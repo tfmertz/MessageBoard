@@ -34,7 +34,7 @@ A simple message board app where users can input an event message and a group of
 
     3.4 Connect to the database with `\c message_board`
 
-    3.5 Import the database production database with `\i message_board.sql`
+    3.5 Import the development database schema with `\i message_board.sql`
 
     3.6 Create the test database by running the SQL query `CREATE DATABASE message_test WITH TEMPLATE message_board;`
 
@@ -44,7 +44,7 @@ A simple message board app where users can input an event message and a group of
 
     4.2 Start a php server by typing `php -S localhost:8000`
 
-    4.3 Open a web browser and connect to the address to `http://localhost:8000/`
+    4.3 Open a web browser and connect to the address `http://localhost:8000/`
 
 #### Troubleshooting
 
