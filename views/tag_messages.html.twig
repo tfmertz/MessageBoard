@@ -16,8 +16,23 @@
                 <hr size="1">
 
                 <h3>Search by Tags</h3>
-                {% for tag in tags %}
-                <a href="/messages/{{ tag.getId }}"><li class="glyphicon glyphicon-tags"> {{ tag.getName }}</li></a> <br>
+                {% for tag in all_tags %}
+                    <ol >
+                    {% if tag.getName == 'Bar' %}
+                        <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-glass"></span>{{ tag.getName }}</li></a><br>
+                    {% elseif tag.getName == 'Work meeting' %}
+                        <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-user"></span>{{ tag.getName }}</li></a><br>
+                    {% elseif tag.getName == "Meet up" %}
+                        <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-calendar"></span>{{ tag.getName }}</li></a><br>
+                    {% elseif tag.getName == "Hiking" %}
+                        <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-tree-conifer"></span>{{ tag.getName }}</li></a><br>
+
+
+                    {% else %}
+                        <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-tag"></span>{{ tag.getName }}</li></a> <br>
+
+                    {% endif %}
+                    </ol>
                 {% endfor %}
 
                 <hr size="1">

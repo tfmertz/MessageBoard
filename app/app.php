@@ -162,7 +162,7 @@
         $messages = $tag->getMessages();
         $tags = Tag::getAll();
 
-        return $app['twig']->render('tag_messages.html.twig', array('tag' => $tag, 'user' => $user, 'tags' => $tags, 'messages' => $messages));
+        return $app['twig']->render('tag_messages.html.twig', array('tag' => $tag, 'user' => $user, 'all_tags' => $tags, 'messages' => $messages));
     });
 
 
