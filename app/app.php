@@ -185,7 +185,13 @@
     $app->get("/messages/{message_id}/edit", function($message_id) use ($app){
         $message = Message::find($message_id);
 
-        return $app['twig']->render('message_edit.html.twig', array('message' => $message));
+       $user = User::find($_SESSION['user_id']);
+
+        if($user == null) {
+            return $app->redirect('/');
+        }
+        
+        return $app['twig']->render('message_edit.html.twig', array('message' => $message, 'user' => $user, 'users'=>User::getAll(),'all_tags' => Tag::getAll()));
 
     });
 
@@ -193,26 +199,16 @@
         $update_message = $_POST['message'];
         $message = Message::find($message_id);
         $message->update($update_message);
-        return $app['twig']->render('message_edit.html.twig', array('message' => $message));
+
+        $user = User::find($_SESSION['user_id']);
+
+        if($user == null) {
+            return $app->redirect('/');
+        }
+
+        return $app['twig']->render('message_edit.html.twig', array('message' => $message, 'user' => $user, 'users'=>User::getAll(),'all_tags' => Tag::getAll()));
 
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     return $app;

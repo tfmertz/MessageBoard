@@ -32,7 +32,7 @@ body {
 		padding-right: 60px;
 		margin-left :50px;
 		position: fixed;
-		z-index: 1;
+		z-index: 1; 
 		background-image: url(http://www.transparenttextures.com/patterns/fabric-of-squares.png)
 
 	}
@@ -54,7 +54,7 @@ body {
 		font-size: 20px;
 	}
 
-	.newpost {
+	.post {
 	 border-width: 3px;
 	border-style: dotted solid;
 	border-color: rgb(153, 255, 235);
@@ -63,7 +63,7 @@ body {
 	width: 55%;
 	}
 
-	.newpost h3 {
+	.post h3 {
 		text-align: right;
 		background-color: rgb(153, 255, 235);
 		color: white;
@@ -72,7 +72,7 @@ body {
 
 	}
 
-	.newpost form {
+	.post form {
 		padding: 0 10px 0 10px;
 	}
 
@@ -174,4 +174,41 @@ h3.hello {
 ol {
 	list-style: none;
 	height: 35px;
+}
+
+
+/* Special edit ********************( check inherited css by class name )***************************/
+
+.content_edit {
+	padding: 0 10px 0 20px;
+
+}
+
+.message_edit {
+	margin: 25px 0 25px 0;
+	font-size: 23px;
+}
+
+.message_edit em {
+	font-size: 18px;
+}
+
+.textarea_edit {
+	width: 80%;
+}
+
+.btn_edit_message {
+	float: right;
+	margin: 0 40px 8px 10px;
+}
+
+.btn_edit_home {
+	float: right;
+	margin: -47px 58px 0 0;
+}
+
+.edit_btn {
+	margin-top: -5%;
+	margin-left: 5%;
+	
 }

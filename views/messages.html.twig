@@ -61,7 +61,7 @@
                 </div>
 
 
-            <div class="col-md-8 col-md-offset-4 newpost">
+            <div class="col-md-8 col-md-offset-4 post">
 
                      <h3>NEW POST</h3>
 
@@ -108,8 +108,8 @@
                     {% endif %}
 
 
-                    <textarea rows="3" name='message' id="textarea_post" class='textarea' disabled>{{ message.getMessage }}</textarea>
-                    <p><a href="/messages/{{ message.getMessageId }}/edit">Edit this Message</a></p>
+                    <textarea rows="3" name='message' id="textarea_post" class='textarea' disabled>{{ message.getMessage }}</textarea> <br>
+                    <a href="/messages/{{ message.getMessageId }}/edit"><button class="btn btn-info edit_btn">Edit</button></a>
 
 
                     <hr size="1">
