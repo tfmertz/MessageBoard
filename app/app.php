@@ -134,7 +134,7 @@
 
 
         return $app['twig']->render('messages.html.twig', array('user' => $user, 'users'=>User::getAll(),
-        'messages' => Message::getAll(), 'all_tags' => Tag::getAll()));
+        'messages' => Message::getAll(), 'message_user' => $user, 'all_tags' => Tag::getAll()));
 
     });
 
@@ -190,7 +190,7 @@
         if($user == null) {
             return $app->redirect('/');
         }
-        
+
         return $app['twig']->render('message_edit.html.twig', array('message' => $message, 'user' => $user, 'users'=>User::getAll(),'all_tags' => Tag::getAll()));
 
     });

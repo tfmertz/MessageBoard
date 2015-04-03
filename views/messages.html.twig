@@ -109,8 +109,10 @@
 
 
                     <textarea rows="3" name='message' id="textarea_post" class='textarea' disabled>{{ message.getMessage }}</textarea> <br>
-                    <a href="/messages/{{ message.getMessageId }}/edit"><button class="btn btn-info edit_btn">Edit</button></a>
 
+                        {% if message.getUserName == user.getName %}
+                            <a href="/messages/{{ message.getMessageId }}/edit"><button class="btn btn-info edit_btn">Edit</button></a>
+                        {% endif %}
 
                     <hr size="1">
 
