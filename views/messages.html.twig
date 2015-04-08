@@ -1,132 +1,135 @@
 <html>
-    <head>
-        <title>Messages</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="/css/main.css">
-    </head>
-    <body>
+<head>
+  <title>Messages</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
 
-        <header><h1><span class="glyphicon glyphicon-send"></span>MessageBoard</h1></header>
+  <header><h1><span class="glyphicon glyphicon-send"></span>MessageBoard</h1></header>
 
-        <div class="row">
+  <div class="container">
+    <div class="row">
 
-            <div class="col-md-3 searchby">
+      <div class="col-md-3 searchby">
 
-                <h3 class='hello'>Hello, {{ user.getName }}</h3>
-                <hr size="1">
+        <h3 class='hello'>Hello, {{ user.getName }}</h3>
+        <hr size="1">
 
-                <h3>Search by Tags</h3>
-                {% for tag in all_tags %}
-                    <ol >
-                    {% if tag.getName == 'Bar' %}
-                        <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-glass"></span>{{ tag.getName }}</li></a><br>
-                    {% elseif tag.getName == 'Work meeting' %}
-                        <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-user"></span>{{ tag.getName }}</li></a><br>
-                    {% elseif tag.getName == "Meet up" %}
-                        <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-calendar"></span>{{ tag.getName }}</li></a><br>
-                    {% elseif tag.getName == "Hiking" %}
-                        <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-tree-conifer"></span>{{ tag.getName }}</li></a><br>
+        <h3>Search by Tags</h3>
+        {% for tag in all_tags %}
+        <ol>
+          {% if tag.getName == 'Bar' %}
+          <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-glass"></span>{{ tag.getName }}</li></a><br>
+          {% elseif tag.getName == 'Work meeting' %}
+          <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-user"></span>{{ tag.getName }}</li></a><br>
+          {% elseif tag.getName == "Meet up" %}
+          <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-calendar"></span>{{ tag.getName }}</li></a><br>
+          {% elseif tag.getName == "Hiking" %}
+          <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-tree-conifer"></span>{{ tag.getName }}</li></a><br>
 
 
-                    {% else %}
-                        <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-tag"></span>{{ tag.getName }}</li></a> <br>
+          {% else %}
+          <a href="/messages/{{ tag.getId }}"><li><span class="glyphicon glyphicon-tag"></span>{{ tag.getName }}</li></a> <br>
 
-                    {% endif %}
-                    </ol>
+          {% endif %}
+        </ol>
+        {% endfor %}
+
+        <hr size="1">
+
+        <form action="/user_messages" method="post">
+
+          <h3>Search by Users</h3>
+
+          <select class='select form-control' name='user' type='text'>
+            {% for user_message in users %}
+            <option value="{{ user_message.getId }}"> {{ user_message.getName }} </option>
+            {% endfor %}
+          </select>
+
+          <button type="submit" class="btn btn-info btn_view_posts">View posts</button>
+
+        </form>
+
+        <a class="btn btn-default btn-view-all" href="/messages">View All</a>
+
+        <hr size="1">
+
+        <a href="/logout" class='button'><button class="btn btn-primary">Log out</button></a>
+
+
+      </div>
+
+
+      <div class="col-md-9 post">
+
+        <div class="form">
+          <h3>NEW POST</h3>
+
+          <form action="/add_message" method="post">
+
+            <input type="hidden" name="user_id" value="{{ user.getId }}">
+            <label for="message">Select a tag :</label> <br>
+            <select name='tag' type='text'>
+              {% for tag in all_tags %}
+              <option value="{{ tag.getId }}"> {{ tag.getName }} </option>
+              {% endfor %}
+            </select> <br>
+            <label for="message" class='label_message'>Message :</label> <br>
+            <textarea rows="4" class='textarea' name='message'> </textarea>
+
+            <button type="submit" class='btn btn-warning btn_add_message'>Add Message</button>
+          </form>
+        </div>
+        <!-- end form -->
+
+        <div class="posts">
+
+          <hr size="1">
+
+          {% if messages is not empty %}
+
+            {% for message in messages %}
+
+              <h3 id="users_name">{{ message.getUserName }}</h3>
+              <p id="date">{{ message.getTheDate }}</p>
+
+              {% if message.getTags is not empty %}
+
+                {% for tag in message.getTags %}
+
+                  <h4 id="tag_name"> - {{ tag.getName() }} -</h4>
+
                 {% endfor %}
 
-                <hr size="1">
-
-                    <form action="/user_messages" method="post">
-
-                        <h3>Search by Users</h3>
-
-                        <select class='select form-control' name='user' type='text'>
-                            {% for user_message in users %}
-                                <option value="{{ user_message.getId }}"> {{ user_message.getName }} </option>
-                            {% endfor %}
-                        </select>
-
-                        <button type="submit" class="btn btn-info btn_view_posts">View posts</button>
-
-                    </form>
-
-                        <a class="btn btn-default btn-view-all" href="/messages">View All</a>
-
-                    <hr size="1">
-
-                    <a href="/logout" class='button'><button class="btn btn-primary">Log out</button></a>
+              {% endif %}
 
 
-                </div>
+              <textarea rows="3" name='message' id="textarea_post" class='textarea' disabled>{{ message.getMessage }}</textarea> <br>
 
+              {% if message.getUserName == user.getName %}
+                <a href="/messages/{{ message.getMessageId }}/edit"><button class="btn btn-info edit_btn">Edit</button></a>
+              {% endif %}
 
-            <div class="col-md-8 col-md-offset-4 post">
+              <hr size="1">
 
-                     <h3>NEW POST</h3>
+            {% endfor %}
 
-                    <form action="/add_message" method="post">
+          {% else %}
 
-                            <input type="hidden" name="user_id" value="{{ user.getId }}">
-                            <label for="message">Select a tag :</label> <br>
-                            <select name='tag' type='text'>
-                              {% for tag in all_tags %}
-                                <option value="{{ tag.getId }}"> {{ tag.getName }} </option>
-                              {% endfor %}
-                            </select> <br>
-                            <label for="message" class='label_message'>Message :</label> <br>
-                            <textarea rows="4" class='textarea' name='message'> </textarea>
+            <h3>No Messages were found for {{ message_user.getName() }}.</h3>
 
-                            <button type="submit" class='btn btn-warning btn_add_message'>Add Message</button>
-                    </form>
+          {% endif %}
 
-                </div>
+        </div>
+        <!-- end posts section -->
+      </div>
+      <!-- end content section -->
 
-            </div>
+    </div>
+    <!-- end row -->
 
-
-            <div class="col-md-8 col-md-offset-4">
-
-                <hr size="1">
-
-
-                {% if messages is not empty %}
-
-                    {% for message in messages %}
-
-                    <h3 id="users_name">{{ message.getUserName }}</h3>
-                    <p id="date">{{ message.getTheDate }}</p>
-
-                    {% if message.getTags is not empty %}
-
-                        {% for tag in message.getTags %}
-
-                            <h4 id="tag_name"> - {{ tag.getName() }} -</h4>
-
-                        {% endfor %}
-
-                    {% endif %}
-
-
-                    <textarea rows="3" name='message' id="textarea_post" class='textarea' disabled>{{ message.getMessage }}</textarea> <br>
-
-                        {% if message.getUserName == user.getName %}
-                            <a href="/messages/{{ message.getMessageId }}/edit"><button class="btn btn-info edit_btn">Edit</button></a>
-                        {% endif %}
-
-                    <hr size="1">
-
-                    {% endfor %}
-
-
-                {% else %}
-
-                    <h3>No Messages were found for {{ message_user.getName() }}.</h3>
-
-                {% endif %}
-
-            </div>
-
-
-    </body>
+  </div>
+</body>
 </html>
