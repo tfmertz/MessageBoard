@@ -1,56 +1,50 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="/css/main.css" media="screen" title="no title" charset="utf-8">
-        <title>Message Board</title>
-    </head>
-    <body>
+<head>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css" media="screen" title="no title" charset="utf-8">
+  <title>Message Board</title>
+</head>
+<body>
+  
+  <header><h1><span class="glyphicon glyphicon-send"></span>MessageBoard</h1></header>
 
-        <header><h1><span class="glyphicon glyphicon-send"></span>MessageBoard</h1></header>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
 
-        <div class="container">
-            <div class="row">
+        {% if error == "true" %}
 
-                <div class="col-md-12">
-                    <div class="text-center">
-
-
-                    {% if error == "true" %}
-
-                        <div class="text-danger">
-                            <h4>Username and/or password invalid</h4>
-                        </div>
-
-                    {% endif %}
-
-                    <h2>Login</h2>
-                    <br>
-
-                    <form action="/" method="post">
-                        <p>
-                        <label name="username">Username:</label>
-                        <input type="text" name="username" id="username" required>
-                        </p>
-
-                        <p>
-                        <label name="password">Password</label>
-                        <input type="password" name="password" id="password" required>
-                        </p>
-                        <button class="btn btn-primary" type="submit">Log in</button>
-                    </form>
-                    <br><br>
-
-                    <h3>Not a member?</h3>
-                    <br>
-
-                    <a class="btn btn-default" href="/sign_up">Sign up!</a>
-
-
-                </div>
-                </div>
-            </div>
+        <div class="text-danger">
+          <h4>Username and/or password invalid</h4>
         </div>
-    </body>
+
+        {% endif %}
+
+        <h2>Login</h2>
+        <br>
+
+        <form action="/" method="post">
+          <p>
+            <label name="username">Username:</label>
+            <input type="text" name="username" id="username" required>
+          </p>
+
+          <p>
+            <label name="password">Password:</label>
+            <input type="password" name="password" id="password" required>
+          </p>
+          <button class="btn btn-primary" type="submit">Log in</button>
+        </form>
+        <br>
+
+        <h3>Not a member?</h3>
+        <br>
+
+        <a class="btn btn-default" href="/sign_up">Sign up!</a>
+      </div>
+    </div>
+  </div>
+</body>
 </html>

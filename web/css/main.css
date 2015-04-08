@@ -2,28 +2,23 @@ body {
 	background-color: GhostWhite;
 }
 
-	 header{
-		padding: 20px;
-		background-color: rgb(102, 255, 204);
-		text-align: center;
-		color: Snow;
-		position: fixed;
-		width: 100%;
-		z-index: 1;
-		text-shadow: -1px 1px 0 rgba(140,140,140,0.6) , 0px -1px 1px rgba(0,0,0,0.67);
-		background-image: url(http://www.transparenttextures.com/patterns/gplay.png);
-		top: 0;
-		margin-bottom: 20px;
-	}
+header {
+	padding: 20px;
+	background-color: #333;
+	text-align: center;
+	color: white;
+	/*text-shadow: -1px 1px 0 rgba(140,140,140,0.6) , 0px -1px 1px rgba(0,0,0,0.67);*/
+	background-image: url(http://www.transparenttextures.com/patterns/gplay.png);
+	margin-bottom: 20px;
+}
+
+h1 {
+	font-size: 3.5em;
+	font-weight: bold;
+}
 
 
 	/********************************************  MESSAGES.HTML.TWIG  *******************************************************/
-
-
-
-	.row {
-		margin-top: 150px;
-	}
 
 	.searchby {
 		background-color: rgb(102, 255, 204);
@@ -32,7 +27,7 @@ body {
 		padding-right: 60px;
 		margin-left :50px;
 		position: fixed;
-		z-index: 1; 
+		z-index: 1;
 		background-image: url(http://www.transparenttextures.com/patterns/fabric-of-squares.png)
 
 	}
@@ -210,5 +205,5 @@ ol {
 .edit_btn {
 	margin-top: -5%;
 	margin-left: 5%;
-	
+
 }
