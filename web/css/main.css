@@ -9,7 +9,21 @@ header {
 	color: white;
 	/*text-shadow: -1px 1px 0 rgba(140,140,140,0.6) , 0px -1px 1px rgba(0,0,0,0.67);*/
 	background-image: url(http://www.transparenttextures.com/patterns/gplay.png);
-	margin-bottom: 20px;
+	/*margin-bottom: 20px;*/
+}
+
+.navbar {
+	background-color: #4367AB;
+	color: snow;
+	border-radius: 0;
+}
+
+.nav a {
+	color: snow;
+}
+
+.nav a:hover {
+	color: #4367AB;
 }
 
 h1 {
