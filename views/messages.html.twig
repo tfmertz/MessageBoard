@@ -61,73 +61,69 @@
   <div class="container">
     <div class="row">
 
-      <div class="col-md-12 text-center">
-        <div class="form">
+      <div id="form" class="col-md-12 text-center">
+        <form class="form-inline" action="/add_message" method="post">
+          <input type="hidden" name="user_id" value="{{ user.getId }}">
+          <div class="form-group">
+            <label for="message">Tag:</label>
+            <select name="tag" type="text" class="form-control">
+              {% for tag in all_tags %}
+                <option value="{{ tag.getId }}">{{ tag.getName }}</option>
+              {% endfor %}
+            </select>
+          </div>
 
-          <form class="form-inline" action="/add_message" method="post">
-            <input type="hidden" name="user_id" value="{{ user.getId }}">
-            <div class="form-group">
-              <label for="message">Tag:</label>
-              <select name="tag" type="text" class="form-control">
-                {% for tag in all_tags %}
-                  <option value="{{ tag.getId }}">{{ tag.getName }}</option>
-                {% endfor %}
-              </select>
-            </div>
+          <div class="form-group wider">
+            <label for="message">Message:</label>
+            <textarea rows="3" name="message" class="form-control"></textarea>
+          </div>
 
-            <div class="form-group wider">
-              <label for="message">Message:</label>
-              <textarea rows="3" name="message" class="form-control"> </textarea>
-            </div>
-
-            <button type="submit" class='btn btn-primary'>Add Message</button>
-          </form>
-        </div>
+          <button type="submit" class='btn btn-primary'>Add Message</button>
+        </form>
         <!-- end form -->
       </div>
 
-      <div class="col-md-8 post">
+      <div class="col-md-12">
 
-        <div class="posts">
+        {% if messages is not empty %}
 
-          <hr size="1">
+          {% for message in messages %}
 
-          {% if messages is not empty %}
+          <div class="post row">
 
-            {% for message in messages %}
-
-              <h3 id="users_name">{{ message.getUserName }}</h3>
+            <div class="post-element col-md-offset-1 col-md-2">
               <p id="date">{{ message.getTheDate }}</p>
-
               {% if message.getTags is not empty %}
 
                 {% for tag in message.getTags %}
 
-                  <h4 id="tag_name"> - {{ tag.getName() }} -</h4>
+                  <a href="/messages/{{ tag.getId() }}">{{ tag.getName() }}</a>
 
                 {% endfor %}
 
               {% endif %}
+            </div>
 
+            <div class="post-element col-md-6">
+              <p class="username">{{ message.getUserName }}</p>
+              <textarea rows="3" name='message' resizable="no"disabled="disabled">{{ message.getMessage }}</textarea>
+            </div>
 
-              <textarea rows="3" name='message' id="textarea_post" class='textarea' disabled>{{ message.getMessage }}</textarea> <br>
-
+            <div class="post-element col-md-1">
               {% if message.getUserName == user.getName %}
-                <a href="/messages/{{ message.getMessageId }}/edit"><button class="btn btn-info edit_btn">Edit</button></a>
+                <a class="btn btn-info" href="/messages/{{ message.getMessageId }}/edit"><span class="glyphicon glyphicon-pencil"></span></a>
               {% endif %}
+            </div>
+          </div>
 
-              <hr size="1">
+          {% endfor %}
 
-            {% endfor %}
+        {% else %}
 
-          {% else %}
+          <h3>No Messages were found for {{ message_user.getName() }}.</h3>
 
-            <h3>No Messages were found for {{ message_user.getName() }}.</h3>
+        {% endif %}
 
-          {% endif %}
-
-        </div>
-        <!-- end posts section -->
       </div>
       <!-- end content section -->
 
