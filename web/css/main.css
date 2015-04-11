@@ -2,14 +2,12 @@ body {
 	background-color: GhostWhite;
 }
 
-header {
-	padding: 20px;
-	background-color: #333;
-	text-align: center;
+header h1 {
 	color: white;
-	/*text-shadow: -1px 1px 0 rgba(140,140,140,0.6) , 0px -1px 1px rgba(0,0,0,0.67);*/
-	background-image: url(http://www.transparenttextures.com/patterns/gplay.png);
-	/*margin-bottom: 20px;*/
+	background: #4367AB;
+	padding: 50px 0 20px 0;
+	margin-top: 0;
+	text-align: center;
 }
 
 .navbar {
@@ -18,12 +16,16 @@ header {
 	border-radius: 0;
 }
 
+.navbar-text .glyphicon {
+	padding: 0 8px;
+}
+
 .nav a {
 	color: snow;
 }
 
-.nav a:hover {
-	color: #4367AB;
+#search_user {
+	width: 175px;
 }
 
 h1 {
