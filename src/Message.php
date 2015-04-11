@@ -63,7 +63,8 @@
 
         function save()
         {
-
+            //needs to be changed to update constantly and needs to remove relationships with tags
+            //out of the join table
             $GLOBALS['DB']->exec("DELETE FROM messages WHERE created < NOW() - INTERVAL '2 days'; ");
             $statement = $GLOBALS['DB']->prepare("INSERT INTO messages (message, created, user_id) VALUES (:message, '{$this->getDate()}', {$this->getUserId()}) RETURNING id;");
             $statement->bindParam(':message', $this->getMessage());

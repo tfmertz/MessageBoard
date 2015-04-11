@@ -33,6 +33,27 @@ h1 {
 	font-weight: bold;
 }
 
+.form-inline .form-group, .form-inline label {
+	vertical-align: top;
+}
+
+.form-inline button {
+	vertical-align: bottom;
+}
+
+.form-inline .form-group {
+	margin-right: 10px;
+}
+
+.form-inline .form-group textarea,
+.form-inline .form-group select {
+	width: 100%;
+}
+
+.wider {
+	width: 40%;
+}
+
 
 /*
 *	MESSAGES.HTML.TWIG

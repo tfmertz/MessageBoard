@@ -23,9 +23,11 @@
 
       <a class="btn btn-default navbar-btn navbar-left" href="/messages">View All</a>
 
+      <!-- end user messages -->
+
       <ul class="nav navbar-left">
 
-        <p class="navbar-text">
+        <p class="navbar-text"><strong>Tags:</strong>
           {% for tag in all_tags %}
 
             {% if tag.getName == 'Bar' %}
@@ -43,6 +45,7 @@
           {% endfor %}
         </p>
       </ul>
+      <!-- end tags -->
 
       <ul class="nav navbar-right">
         <p class="navbar-text">
@@ -51,33 +54,39 @@
       </ul>
     </div>
   </nav>
+  <!-- end nav -->
 
   <header><h1><span class="glyphicon glyphicon-send"></span>MessageBoard</h1></header>
 
   <div class="container">
     <div class="row">
 
-      <div class="col-md-9 post">
-
+      <div class="col-md-12 text-center">
         <div class="form">
-          <h3>NEW POST</h3>
 
-          <form action="/add_message" method="post">
-
+          <form class="form-inline" action="/add_message" method="post">
             <input type="hidden" name="user_id" value="{{ user.getId }}">
-            <label for="message">Select a tag :</label> <br>
-            <select name='tag' type='text'>
-              {% for tag in all_tags %}
-              <option value="{{ tag.getId }}"> {{ tag.getName }} </option>
-              {% endfor %}
-            </select> <br>
-            <label for="message" class='label_message'>Message :</label> <br>
-            <textarea rows="4" class='textarea' name='message'> </textarea>
+            <div class="form-group">
+              <label for="message">Tag:</label>
+              <select name="tag" type="text" class="form-control">
+                {% for tag in all_tags %}
+                  <option value="{{ tag.getId }}">{{ tag.getName }}</option>
+                {% endfor %}
+              </select>
+            </div>
 
-            <button type="submit" class='btn btn-warning btn_add_message'>Add Message</button>
+            <div class="form-group wider">
+              <label for="message">Message:</label>
+              <textarea rows="3" name="message" class="form-control"> </textarea>
+            </div>
+
+            <button type="submit" class='btn btn-primary'>Add Message</button>
           </form>
         </div>
         <!-- end form -->
+      </div>
+
+      <div class="col-md-8 post">
 
         <div class="posts">
 
