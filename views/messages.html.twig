@@ -92,7 +92,7 @@
           <div class="post row">
 
             <div class="post-element col-md-offset-1 col-md-2">
-              <p id="date">{{ message.getTheDate }}</p>
+              <p class="date">{{ message.getTheDate }}</p>
               {% if message.getTags is not empty %}
 
                 {% for tag in message.getTags %}
@@ -106,12 +106,12 @@
 
             <div class="post-element col-md-6">
               <p class="username">{{ message.getUserName }}</p>
-              <textarea rows="3" name='message' resizable="no"disabled="disabled">{{ message.getMessage }}</textarea>
+              <textarea rows="3" name="message" disabled="disabled">{{ message.getMessage }}</textarea>
             </div>
 
             <div class="post-element col-md-1">
               {% if message.getUserName == user.getName %}
-                <a class="btn btn-info" href="/messages/{{ message.getMessageId }}/edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-default" title="Edit" href="/messages/{{ message.getMessageId }}/edit"><span class="glyphicon glyphicon-pencil"></span></a>
               {% endif %}
             </div>
           </div>
