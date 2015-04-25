@@ -49,7 +49,10 @@
         }
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO users (name, admin, password) VALUES ('{$this->getName()}', '{$this->getIsAdmin()}', '{$this->getPassword()}') RETURNING id;");
+            $statement = $GLOBALS['DB']->prepare("INSERT INTO users (name, admin, password) VALUES (:name, '{$this->getIsAdmin()}', :password) RETURNING id;");
+            $statement->bindParam(':name', $this->getName());
+            $statement->bindParam(':password', $this->getPassword());
+            $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
@@ -103,7 +106,9 @@
 
         static function checkAvailable($check_user_name)
         {
-            $statement = $GLOBALS['DB']->query("SELECT * FROM users WHERE name = '$check_user_name';");
+            $statement = $GLOBALS['DB']->prepare("SELECT * FROM users WHERE name = :name;");
+            $statement->bindParam(':name', $check_user_name);
+            $statement->execute();
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             return empty($results);
@@ -112,7 +117,10 @@
         static function logInCheck($user_name, $password)
         {
 
-            $statement = $GLOBALS['DB']->query("SELECT * FROM users WHERE name = '$user_name' AND password= '$password';");
+            $statement = $GLOBALS['DB']->prepare("SELECT * FROM users WHERE name = :name AND password = :password;");
+            $statement->bindParam(':name', $user_name);
+            $statement->bindParam(':password', $password);
+            $statement->execute();
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
             $match_user = null;
             foreach ($results as $result) {

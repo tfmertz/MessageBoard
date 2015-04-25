@@ -115,7 +115,9 @@
 
         function update($new_message)
         {
-            $GLOBALS['DB']->exec("UPDATE messages SET message = '{$new_message}' WHERE id = {$this->getMessageId()};");
+            $st = $GLOBALS['DB']->prepare("UPDATE messages SET message = :message WHERE id = {$this->getMessageId()};");
+            $st->bindParam(':message', $new_message);
+            $st->execute();
             $this->setMessage($new_message);
         }
 
@@ -154,14 +156,5 @@
             return $user_name;
 
         }
-
-
-
-
-
     }
-
-
-
-
  ?>

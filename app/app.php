@@ -97,7 +97,7 @@
             if (User::checkAvailable($user_name))
             {
                 $password= $_POST['password'];
-                $new_user = new User($app->escape($user_name), $app->escape($password));
+                $new_user = new User($user_name, $password);
                 $new_user->save();
                 //store user id into the session
                 $_SESSION['user_id'] = $new_user->getId();
