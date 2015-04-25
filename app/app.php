@@ -133,8 +133,7 @@
         }
 
 
-        return $app['twig']->render('messages.html.twig', array('user' => $user, 'users'=>User::getAll(),
-        'messages' => Message::getAll(), 'message_user' => $user, 'all_tags' => Tag::getAll()));
+        return $app['twig']->render('messages.html.twig', array('user' => $user, 'users'=>User::getAll(), 'messages' => Message::getAll(), 'message_user' => $user, 'all_tags' => Tag::getAll()));
 
     });
 
@@ -159,10 +158,10 @@
     $app->get("/messages/{tag_id}", function($tag_id) use ($app) {
         $user = User::find($_SESSION['user_id']);
         $tag = Tag::findById($tag_id);
-        $messages = $tag->getMessages();
+        $tagged_messages = $tag->getMessages();
         $tags = Tag::getAll();
 
-        return $app['twig']->render('tag_messages.html.twig', array('tag' => $tag, 'user' => $user, 'all_tags' => $tags, 'messages' => $messages));
+        return $app['twig']->render('messages.html.twig', array('user' => $user, 'users'=>User::getAll(), 'messages' => $tagged_messages, 'message_user' => $user, 'all_tags' => Tag::getAll()));
     });
 
 
