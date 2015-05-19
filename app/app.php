@@ -54,7 +54,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         //check if login is valid, if so return a user, if not null
-        $user = User::logInCheck($app->escape($username), $app->escape($password));
+        $user = User::logInCheck($username, $password);
         if($user) {
             //if we have a user store it into the session by id
             $_SESSION['user_id'] = $user->getId();
@@ -96,7 +96,7 @@
         {
             if (User::checkAvailable($user_name))
             {
-                $password= $_POST['password'];
+                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $new_user = new User($user_name, $password);
                 $new_user->save();
                 //store user id into the session
