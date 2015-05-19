@@ -7,11 +7,24 @@
     $app = new Silex\Application();
     $app['debug'] = true;
 
-    $DB = new PDO('pgsql:host=localhost;dbname=message_board', 'tom', '1234');
-
+    // Register twig
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
     ));
+
+    // Register monolog
+    $app->register(new Silex\Provider\MonologServiceProvider(), array(
+        'monolog.logfile' => 'php://stderr'
+    ));
+
+    //get the database info
+    $dbopts = parse_url(getenv('DATABASE_URL'));
+    $dsn = 'pgsql:dbname='.ltrim($dbopts["path"],'/').';host='.$dbopts["host"];
+    $db_config = array(
+        'ports' => $dbopts['port']
+    );
+    //create the PDO object
+    $DB = new PDO($dsn, $dbopts['user'], $dbopts['pass']);
 
     //information for patch/delete requests and silex forward
     use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +49,7 @@
 
 //********HOMEPAGE****************HOMEPAGE****************HOMEPAGE***********
     $app->get("/", function(Request $request) use ($app) {
+        $app['monolog']->addDebug('logging output');
         $error = "false";
 
         $query = $request->query->all();
