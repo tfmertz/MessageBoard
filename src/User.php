@@ -116,15 +116,16 @@
 
         static function logInCheck($user_name, $password)
         {
-
-            $statement = $GLOBALS['DB']->prepare("SELECT * FROM users WHERE name = :name AND password = :password;");
+            $statement = $GLOBALS['DB']->prepare("SELECT * FROM users WHERE name = :name");
             $statement->bindParam(':name', $user_name);
-            $statement->bindParam(':password', $password);
             $statement->execute();
+
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
             $match_user = null;
             foreach ($results as $result) {
-                $match_user = new User($result['name'], $result['password'], $result['admin'], $result['id']);
+                if(password_verify($password, $result['password'])) {
+                    $match_user = new User($result['name'], $result['password'], $result['admin'], $result['id']);
+                }
             }
             return $match_user;
         }
@@ -132,13 +133,13 @@
 
         static function find($search_id)
         {
+            $st = $GLOBALS['DB']->prepare("SELECT * FROM users WHERE id = :id;");
+            $st->bindParam(':id', $search_id);
+            $st->execute();
+
             $found_user = null;
-            $users = User::getAll();
-            foreach($users as $user) {
-                $user_id = $user->getID();
-                if ($user_id == $search_id) {
-                  $found_user = $user;
-                }
+            while($row = $st->fetch(PDO::FETCH_ASSOC)) {
+                $found_user = new User($row['name'], $row['password'], $row['admin'], $row['id']);
             }
             return $found_user;
         }
