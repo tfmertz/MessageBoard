@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: messages; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: messages; Type: TABLE; Schema: public; Owner: tom; Tablespace: 
 --
 
 CREATE TABLE messages (
@@ -41,10 +41,10 @@ CREATE TABLE messages (
 );
 
 
-ALTER TABLE messages OWNER TO "Guest";
+ALTER TABLE public.messages OWNER TO tom;
 
 --
--- Name: messages_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: messages_id_seq; Type: SEQUENCE; Schema: public; Owner: tom
 --
 
 CREATE SEQUENCE messages_id_seq
@@ -55,17 +55,17 @@ CREATE SEQUENCE messages_id_seq
     CACHE 1;
 
 
-ALTER TABLE messages_id_seq OWNER TO "Guest";
+ALTER TABLE public.messages_id_seq OWNER TO tom;
 
 --
--- Name: messages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: messages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tom
 --
 
 ALTER SEQUENCE messages_id_seq OWNED BY messages.id;
 
 
 --
--- Name: messages_tags; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: messages_tags; Type: TABLE; Schema: public; Owner: tom; Tablespace: 
 --
 
 CREATE TABLE messages_tags (
@@ -75,10 +75,10 @@ CREATE TABLE messages_tags (
 );
 
 
-ALTER TABLE messages_tags OWNER TO "Guest";
+ALTER TABLE public.messages_tags OWNER TO tom;
 
 --
--- Name: messages_tags_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: messages_tags_id_seq; Type: SEQUENCE; Schema: public; Owner: tom
 --
 
 CREATE SEQUENCE messages_tags_id_seq
@@ -89,17 +89,17 @@ CREATE SEQUENCE messages_tags_id_seq
     CACHE 1;
 
 
-ALTER TABLE messages_tags_id_seq OWNER TO "Guest";
+ALTER TABLE public.messages_tags_id_seq OWNER TO tom;
 
 --
--- Name: messages_tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: messages_tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tom
 --
 
 ALTER SEQUENCE messages_tags_id_seq OWNED BY messages_tags.id;
 
 
 --
--- Name: tags; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: tags; Type: TABLE; Schema: public; Owner: tom; Tablespace: 
 --
 
 CREATE TABLE tags (
@@ -108,10 +108,10 @@ CREATE TABLE tags (
 );
 
 
-ALTER TABLE tags OWNER TO "Guest";
+ALTER TABLE public.tags OWNER TO tom;
 
 --
--- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: tom
 --
 
 CREATE SEQUENCE tags_id_seq
@@ -122,17 +122,17 @@ CREATE SEQUENCE tags_id_seq
     CACHE 1;
 
 
-ALTER TABLE tags_id_seq OWNER TO "Guest";
+ALTER TABLE public.tags_id_seq OWNER TO tom;
 
 --
--- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tom
 --
 
 ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: tom; Tablespace: 
 --
 
 CREATE TABLE users (
@@ -143,10 +143,10 @@ CREATE TABLE users (
 );
 
 
-ALTER TABLE users OWNER TO "Guest";
+ALTER TABLE public.users OWNER TO tom;
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: tom
 --
 
 CREATE SEQUENCE users_id_seq
@@ -157,105 +157,138 @@ CREATE SEQUENCE users_id_seq
     CACHE 1;
 
 
-ALTER TABLE users_id_seq OWNER TO "Guest";
+ALTER TABLE public.users_id_seq OWNER TO tom;
 
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tom
 --
 
 ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Name: id; Type: DEFAULT; Schema: public; Owner: tom
 --
 
 ALTER TABLE ONLY messages ALTER COLUMN id SET DEFAULT nextval('messages_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Name: id; Type: DEFAULT; Schema: public; Owner: tom
 --
 
 ALTER TABLE ONLY messages_tags ALTER COLUMN id SET DEFAULT nextval('messages_tags_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Name: id; Type: DEFAULT; Schema: public; Owner: tom
 --
 
 ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Name: id; Type: DEFAULT; Schema: public; Owner: tom
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- Data for Name: messages; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: messages; Type: TABLE DATA; Schema: public; Owner: tom
 --
 
 COPY messages (id, message, created, user_id) FROM stdin;
+19	Going out to Mi Mero Mole at 5pm if anyone wants to come!	2015-05-16 17:26:42	4
+20	Multnomah Falls this weekend if anyone is interested? Give me a call 717-123-45678!	2015-05-16 17:28:01	4
+21	Going to Phase2 for the Sass meet up, who's in? It starts a 7pm, normally pizza and beer with a lot of companies looking to hire...	2015-05-16 17:28:56	2
 \.
 
 
 --
--- Name: messages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: messages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tom
 --
 
-SELECT pg_catalog.setval('messages_id_seq', 1, false);
+SELECT pg_catalog.setval('messages_id_seq', 21, true);
 
 
 --
--- Data for Name: messages_tags; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: messages_tags; Type: TABLE DATA; Schema: public; Owner: tom
 --
 
 COPY messages_tags (id, message_id, tag_id) FROM stdin;
+1	1	2
+2	2	1
+3	3	3
+4	4	1
+5	5	1
+6	6	2
+7	7	4
+8	8	1
+9	9	2
+10	10	3
+11	11	1
+12	12	2
+13	13	3
+14	14	1
+15	15	1
+16	16	1
+17	17	2
+18	18	3
+19	19	1
+20	20	4
+21	21	2
 \.
 
 
 --
--- Name: messages_tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: messages_tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tom
 --
 
-SELECT pg_catalog.setval('messages_tags_id_seq', 1, false);
+SELECT pg_catalog.setval('messages_tags_id_seq', 21, true);
 
 
 --
--- Data for Name: tags; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: tags; Type: TABLE DATA; Schema: public; Owner: tom
 --
 
 COPY tags (id, name) FROM stdin;
+1	Bar
+2	Meet up
+3	Work meeting
+4	Hiking
 \.
 
 
 --
--- Name: tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tom
 --
 
-SELECT pg_catalog.setval('tags_id_seq', 1, false);
+SELECT pg_catalog.setval('tags_id_seq', 4, true);
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: tom
 --
 
 COPY users (id, name, password, admin) FROM stdin;
+1	dad123	thomas	f
+2	thomas	thomas12	f
+3	Let'sss	123456	f
+4	amberg	amberg	f
+5	esbon599	$2y$10$PLA54.1IRACsRWTw8NdsXeDHVpNiOvS9M5AysbI2ZnZkDV9782.0i	f
 \.
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tom
 --
 
-SELECT pg_catalog.setval('users_id_seq', 1, false);
+SELECT pg_catalog.setval('users_id_seq', 5, true);
 
 
 --
--- Name: messages_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: messages_pkey; Type: CONSTRAINT; Schema: public; Owner: tom; Tablespace: 
 --
 
 ALTER TABLE ONLY messages
@@ -263,7 +296,7 @@ ALTER TABLE ONLY messages
 
 
 --
--- Name: messages_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: messages_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: tom; Tablespace: 
 --
 
 ALTER TABLE ONLY messages_tags
@@ -271,7 +304,7 @@ ALTER TABLE ONLY messages_tags
 
 
 --
--- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: tom; Tablespace: 
 --
 
 ALTER TABLE ONLY tags
@@ -279,7 +312,7 @@ ALTER TABLE ONLY tags
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: tom; Tablespace: 
 --
 
 ALTER TABLE ONLY users
@@ -287,12 +320,12 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: epicodus
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM epicodus;
-GRANT ALL ON SCHEMA public TO epicodus;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
