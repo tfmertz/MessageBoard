@@ -7,6 +7,10 @@
     $app = new Silex\Application();
     $app['debug'] = true;
 
+    //Add environment variables
+    $dotenv = new Dotenv\Dotenv(__DIR__);
+    $dotenv->load();
+
     // Register twig
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
