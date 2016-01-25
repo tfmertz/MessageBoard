@@ -237,11 +237,31 @@
             return "Please log in!";
         }
         if( ! $user->getIsAdmin()) {
-            // return $app->redirect('/');
-            return 'Not Admin';
+            return $app->redirect('/');
         }
 
-        return "Made it ;)";
+        return $app['twig']->render('users.twig', array(
+          'users' => User::getAll(),
+        ));
+    });
+
+    $app->get("admin/users/{user_id}/delete", function($user_id) use ($app) {
+        $user = User::find($_SESSION['user_id']);
+        $user_to_delete = User::find($user_id);
+
+        if($user == null) {
+            return "Please log in!";
+        }
+        if( ! $user->getIsAdmin()) {
+            return $app->redirect('/');
+        }
+
+        if( $user_to_delete->getIsAdmin() ) {
+            return "Sorry, admins can't be deleted at this time.";
+        } else {
+            $user_to_delete->delete();
+            return $app->redirect('/admin/users');
+        }
     });
 
     return $app;

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Admin | Users</title>
+  </head>
+  <body>
+    <h1>Welcome to Admin Land</h1>
+
+    <h2>Users</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <td>User</td>
+          <td>Admin?</td>
+          <td>Delete</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{ user.getName }}</td>
+          <td>{{ user.getIsAdmin }}</td>
+          <td><a href="/admin/users/{{ user.getId }}/delete">Delete</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
