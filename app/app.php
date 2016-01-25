@@ -228,5 +228,20 @@
     });
 
 
+#### ADMIN ####
+
+    $app->get("/admin/users", function() use ($app) {
+        $user = User::find($_SESSION['user_id']);
+
+        if($user == null) {
+            return "Please log in!";
+        }
+        if( ! $user->getIsAdmin()) {
+            // return $app->redirect('/');
+            return 'Not Admin';
+        }
+
+        return "Made it ;)";
+    });
+
     return $app;
-?>
