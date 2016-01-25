@@ -245,7 +245,7 @@
         ));
     });
 
-    $app->get("admin/users/{user_id}/delete", function($user_id) use ($app) {
+    $app->get("/admin/users/{user_id}/delete", function($user_id) use ($app) {
         $user = User::find($_SESSION['user_id']);
         $user_to_delete = User::find($user_id);
 
